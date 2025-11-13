@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "GameDex"
 include(":app")
+include(":domain")
