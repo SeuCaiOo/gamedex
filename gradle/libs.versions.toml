@@ -12,10 +12,12 @@ kotlinxSerialization = "1.9.0"
 navigation = "2.9.5"
 koinAndroid = "3.5.0"
 jetbrainsKotlinJvm = "2.2.21"
+mockk = "1.14.6"
+coroutinesTest = "1.10.2"
+kotlinTest = "1.9.23"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
@@ -37,6 +39,12 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroid" }
 
+# UnitTest
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesTest" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlinTest" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -47,3 +55,4 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrai
 
 [bundles]
 koin = ["koin-android", "koin-compose"]
+unitTest = ["junit", "kotlinx-coroutines-test", "kotlin-test", "mockk"]

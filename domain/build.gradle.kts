@@ -13,5 +13,5 @@ kotlin {
 }
 
 dependencies {
-    testImplementation(libs.junit)
+    testImplementation(libs.bundles.unitTest)
 }
