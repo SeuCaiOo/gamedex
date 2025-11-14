@@ -11,6 +11,11 @@ data class GamePlatformDetail(
     override val gamesCount: Int,
     override val topGames: List<TopGameData> = TopGameData.sampleList
 ) : GameDataDetail {
+
+    fun setTopGames(topGames: List<TopGameData>): GamePlatformDetail {
+        return this.copy(topGames = topGames)
+    }
+
     companion object {
         val sampleList = listOf(
             GamePlatformDetail(
