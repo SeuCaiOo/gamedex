@@ -1,6 +1,5 @@
-package br.com.seucaio.gamedex.remote.dto
+package br.com.seucaio.gamedex.remote.dto.list
 
-import br.com.seucaio.gamedex.remote.dto.list.GameDataListInfoResponse
 import kotlinx.serialization.Serializable
 
 @Serializable

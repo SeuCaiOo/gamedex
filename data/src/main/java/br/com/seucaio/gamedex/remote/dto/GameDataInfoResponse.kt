@@ -1,4 +1,4 @@
-package br.com.seucaio.gamedex.remote.dto.list
+package br.com.seucaio.gamedex.remote.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
