@@ -2,13 +2,14 @@ package br.com.seucaio.gamedex.mapper
 
 import br.com.seucaio.gamedex.local.database.GamePlatformEntity
 import br.com.seucaio.gamedex.model.platform.GamePlatform
+import br.com.seucaio.gamedex.model.platform.GamePlatformDetail
 import br.com.seucaio.gamedex.util.extension.EMPTY
 
 object PlatformsMapper {
 
     fun GamePlatformEntity.toDomain(): GamePlatform {
         return GamePlatform(
-            id = id,
+            id = platformId,
             name = name,
             gamesCount = gamesCount,
         )
@@ -29,6 +30,19 @@ object PlatformsMapper {
 
     fun List<GamePlatform>.toEntity(): List<GamePlatformEntity> {
         return map { it.toEntity() }
+    }
+
+    fun GamePlatformEntity.toDetailDomain(): GamePlatformDetail {
+        return GamePlatformDetail(
+            id = platformId,
+            name = name,
+            gamesCount = gamesCount,
+            description = description
+        )
+    }
+
+    fun List<GamePlatformEntity>.toDetailDomain(): List<GamePlatformDetail> {
+        return map { it.toDetailDomain() }
     }
 
 }
