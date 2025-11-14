@@ -15,6 +15,9 @@ val domainModule = module {
     factory { GetPlatformDetailByIdUseCase(repository = get<PlatformsRepository>()) }
 }
 
+val dataModule = provideDataModule()
+
 val gameDexModules = listOf(
-    domainModule
+    domainModule,
+    dataModule
 )
