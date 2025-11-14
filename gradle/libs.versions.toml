@@ -12,6 +12,9 @@ kotlinxSerialization = "1.9.0"
 navigation = "2.9.5"
 koinAndroid = "3.5.0"
 jetbrainsKotlinJvm = "2.2.21"
+retrofit = "2.9.0"
+serializationConverter = "0.8.0"
+loggingInterceptor = "4.11.0"
 mockk = "1.14.6"
 coroutinesTest = "1.10.2"
 kotlinTest = "1.9.23"
@@ -39,6 +42,11 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroid" }
 
+# Retrofit
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "serializationConverter" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
+
 # UnitTest
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesTest" }
@@ -56,4 +64,5 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 
 [bundles]
 koin = ["koin-android", "koin-compose"]
+retrofit = ["retrofit", "retrofit-serialization-converter", "logging-interceptor"]
 unitTest = ["junit", "kotlinx-coroutines-test", "kotlin-test", "mockk"]
