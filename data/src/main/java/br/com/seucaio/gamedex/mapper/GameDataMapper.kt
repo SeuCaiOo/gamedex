@@ -2,8 +2,8 @@ package br.com.seucaio.gamedex.mapper
 
 import br.com.seucaio.gamedex.model.platform.GamePlatform
 import br.com.seucaio.gamedex.model.platform.GamePlatformDetail
-import br.com.seucaio.gamedex.remote.dto.GameDataInfoResponse
-import br.com.seucaio.gamedex.remote.dto.GameDataListInfoResponse
+import br.com.seucaio.gamedex.remote.dto.list.GameDataInfoResponse
+import br.com.seucaio.gamedex.remote.dto.list.GameDataListInfoResponse
 import kotlin.collections.map
 
 object GameDataMapper {

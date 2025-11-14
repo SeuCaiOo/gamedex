@@ -1,6 +1,6 @@
 package br.com.seucaio.gamedex.remote.source
 
-import br.com.seucaio.gamedex.remote.dto.GameDataInfoResponse
+import br.com.seucaio.gamedex.remote.dto.list.GameDataInfoResponse
 import br.com.seucaio.gamedex.remote.dto.GameDataListResponse
 import br.com.seucaio.gamedex.remote.service.GameDexApiService
 import kotlinx.coroutines.CoroutineDispatcher
