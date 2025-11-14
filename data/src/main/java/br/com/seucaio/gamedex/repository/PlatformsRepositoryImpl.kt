@@ -4,6 +4,7 @@ import br.com.seucaio.gamedex.local.database.GamePlatformEntity
 import br.com.seucaio.gamedex.local.source.PlatformsLocalDataSource
 import br.com.seucaio.gamedex.mapper.GameDataMapper.toPlatformDetailDomain
 import br.com.seucaio.gamedex.mapper.GameDataMapper.toPlatformDomain
+import br.com.seucaio.gamedex.mapper.PlatformsMapper.toDetailDomain
 import br.com.seucaio.gamedex.mapper.PlatformsMapper.toDomain
 import br.com.seucaio.gamedex.mapper.PlatformsMapper.toEntity
 import br.com.seucaio.gamedex.model.platform.GamePlatform
@@ -15,31 +16,37 @@ class PlatformsRepositoryImpl(
     private val localDataSource: PlatformsLocalDataSource
 ) : PlatformsRepository {
     override suspend fun getAll(): Result<List<GamePlatform>> {
-        return try {
-            val localData: List<GamePlatform> = localDataSource.getAll().toDomain()
-            val remoteData: List<GamePlatform> =
+        try {
+            val localPlatforms: List<GamePlatformEntity> = localDataSource.getAll()
+
+            if (localPlatforms.isNotEmpty()) return Result.success(localPlatforms.toDomain())
+
+            val remotePlatforms: List<GamePlatform> =
                 remoteDataSource.getAll().results.toPlatformDomain()
-            if (localData.isEmpty()) localDataSource.clearAndCache(remoteData.toEntity())
-            Result.success(remoteData)
+            localDataSource.clearAndCache(remotePlatforms.toEntity())
+            return Result.success(remotePlatforms)
         } catch (e: Exception) {
-            Result.failure(e)
+            return Result.failure(e)
         }
     }
 
     override suspend fun getById(id: Int): Result<GamePlatformDetail> {
-        return try {
-            val platformEntity: GamePlatformEntity? = localDataSource.getById(id)
-            val remoteData: GamePlatformDetail =
+        try {
+            val platformEntity: GamePlatformEntity? = localDataSource.getByPlatformId(id)
+            if (platformEntity != null && platformEntity.description.isNotBlank()) {
+                return Result.success(platformEntity.toDetailDomain())
+            }
+
+            val remotePlatformDetail: GamePlatformDetail =
                 remoteDataSource.getById(id).toPlatformDetailDomain()
 
-            platformEntity?.let { entity ->
-                if (entity.description.isBlank()) {
-                    localDataSource.update(entity.copy(description = remoteData.description))
-                }
+            val entityToUpdate = localDataSource.getByPlatformId(id)
+            entityToUpdate?.let {
+                localDataSource.update(it.copy(description = remotePlatformDetail.description))
             }
-            Result.success(remoteData)
+            return Result.success(remotePlatformDetail)
         } catch (e: Exception) {
-            Result.failure(e)
+            return Result.failure(e)
         }
     }
 }
