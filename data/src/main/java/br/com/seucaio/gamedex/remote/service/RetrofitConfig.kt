@@ -1,6 +1,6 @@
 package br.com.seucaio.gamedex.remote.service
 
-import br.com.seucaio.gamedex.BuildConfig
+import br.com.seucaio.gamedex.data.BuildConfig
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
