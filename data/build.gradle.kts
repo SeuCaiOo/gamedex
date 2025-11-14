@@ -42,6 +42,9 @@ dependencies {
     implementation(project(":domain"))
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.bundles.retrofit)
+    implementation(libs.bundles.koin)
 
     testImplementation(libs.junit)
 
