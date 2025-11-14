@@ -2,8 +2,8 @@ pluginManagement {
     repositories {
         google {
             content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("com\.android.*")
+                includeGroupByRegex("com\.google.*")
                 includeGroupByRegex("androidx.*")
             }
         }
@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "GameDex"
 include(":app")
+include(":domain")
+include(":data")
