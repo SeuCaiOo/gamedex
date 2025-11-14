@@ -1,8 +1,16 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+}
+
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
 }
 
 android {
@@ -16,6 +24,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("API_KEY", "")}\"")
     }
 
     buildTypes {
@@ -35,6 +45,9 @@ android {
         compilerOptions {
             jvmTarget = JvmTarget.JVM_11
         }
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 
