@@ -1,6 +1,6 @@
 package br.com.seucaio.gamedex.remote.service
 
-import br.com.seucaio.gamedex.BuildConfig
+import br.com.seucaio.gamedex.data.BuildConfig
 import br.com.seucaio.gamedex.remote.dto.GameDataInfoResponse
 import br.com.seucaio.gamedex.remote.dto.list.GameDataListResponse
 import retrofit2.http.GET

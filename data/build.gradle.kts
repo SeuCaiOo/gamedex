@@ -16,7 +16,7 @@ if (localPropertiesFile.exists()) {
 }
 
 android {
-    namespace = "br.com.seucaio.gamedex"
+    namespace = "br.com.seucaio.gamedex.data"
     compileSdk {
         version = release(36)
     }
