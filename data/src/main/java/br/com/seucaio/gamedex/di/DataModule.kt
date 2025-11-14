@@ -1,5 +1,9 @@
 package br.com.seucaio.gamedex.di
 
+import br.com.seucaio.gamedex.local.database.GameDexDatabase
+import br.com.seucaio.gamedex.local.database.PlatformsDao
+import br.com.seucaio.gamedex.local.source.PlatformsLocalDataSource
+import br.com.seucaio.gamedex.local.source.PlatformsLocalDataSourceImpl
 import br.com.seucaio.gamedex.remote.service.GameDexApiService
 import br.com.seucaio.gamedex.remote.service.RetrofitConfig
 import br.com.seucaio.gamedex.remote.service.interceptor.NetworkInterceptor
@@ -23,13 +27,22 @@ fun provideDataModule() = module {
     single<GameDexApiService> { get<Retrofit>().create(GameDexApiService::class.java) }
     // endregion
 
+    // region Database
+    single<GameDexDatabase> { GameDexDatabase.getDatabase(context = get()) }
+    single<PlatformsDao> { get<GameDexDatabase>().platformsDao() }
+    // endregion
+
     // region Data Source
     single<PlatformsRemoteDataSource> {
         PlatformsRemoteDataSourceImpl(apiService = get<GameDexApiService>())
     }
+    single<PlatformsLocalDataSource> { PlatformsLocalDataSourceImpl(dao = get<PlatformsDao>()) }
     // endregion
 
     single<PlatformsRepository> {
-        PlatformsRepositoryImpl(remoteDataSource = get<PlatformsRemoteDataSource>())
+        PlatformsRepositoryImpl(
+            remoteDataSource = get<PlatformsRemoteDataSource>(),
+            localDataSource = get<PlatformsLocalDataSource>()
+        )
     }
 }
