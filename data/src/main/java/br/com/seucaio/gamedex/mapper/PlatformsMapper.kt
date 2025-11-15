@@ -1,6 +1,6 @@
 package br.com.seucaio.gamedex.mapper
 
-import br.com.seucaio.gamedex.local.database.GamePlatformEntity
+import br.com.seucaio.gamedex.local.database.entity.GamePlatformEntity
 import br.com.seucaio.gamedex.model.platform.GamePlatform
 import br.com.seucaio.gamedex.model.platform.GamePlatformDetail
 import br.com.seucaio.gamedex.util.extension.EMPTY

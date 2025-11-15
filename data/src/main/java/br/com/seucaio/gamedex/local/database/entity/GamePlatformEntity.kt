@@ -1,10 +1,14 @@
-package br.com.seucaio.gamedex.local.database
+package br.com.seucaio.gamedex.local.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "platforms")
+@Entity(
+    tableName = "platforms",
+    indices = [Index(value = ["platform_id"], unique = true)]
+)
 data class GamePlatformEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
