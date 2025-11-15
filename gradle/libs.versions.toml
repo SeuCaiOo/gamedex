@@ -39,6 +39,7 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
+androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigation" }
 
 # Serialization
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
@@ -87,3 +88,4 @@ retrofit = ["retrofit", "retrofit-serialization-converter", "logging-interceptor
 room = ["androidx-room-runtime", "androidx-room-ktx"]
 unitTest = ["junit", "kotlinx-coroutines-test", "kotlin-test", "mockk"]
 unitTestAndroid = ["androidx-core-testing", "turbine"]
+androidTest = ["androidx-junit", "androidx-espresso-core"]
