@@ -2,6 +2,7 @@ package br.com.seucaio.gamedex.di
 
 import br.com.seucaio.gamedex.local.database.GameDexDatabase
 import br.com.seucaio.gamedex.local.database.dao.PlatformsDao
+import br.com.seucaio.gamedex.local.database.dao.TopGamesDao
 import br.com.seucaio.gamedex.local.source.PlatformsLocalDataSource
 import br.com.seucaio.gamedex.local.source.PlatformsLocalDataSourceImpl
 import br.com.seucaio.gamedex.remote.service.GameDexApiService
@@ -30,13 +31,16 @@ fun provideDataModule() = module {
     // region Database
     single<GameDexDatabase> { GameDexDatabase.getDatabase(context = get()) }
     single<PlatformsDao> { get<GameDexDatabase>().platformsDao() }
+    single<TopGamesDao> { get<GameDexDatabase>().topGamesDao() }
     // endregion
 
     // region Data Source
     single<PlatformsRemoteDataSource> {
         PlatformsRemoteDataSourceImpl(apiService = get<GameDexApiService>())
     }
-    single<PlatformsLocalDataSource> { PlatformsLocalDataSourceImpl(dao = get<PlatformsDao>()) }
+    single<PlatformsLocalDataSource> {
+        PlatformsLocalDataSourceImpl(dao = get<PlatformsDao>(), topGamesDao = get<TopGamesDao>())
+    }
     // endregion
 
     single<PlatformsRepository> {
