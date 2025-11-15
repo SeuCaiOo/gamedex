@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">GameDex</string>
+    <string name="back">Back</string>
+    <string name="no_description">No description</string>
+    <string name="no_games">No games</string>
+    <string name="game_count_info">%1$d games</string>
+    <string name="show_details">Show details</string>
+    <string name="oops_something_went_wrong">Oops! Something went wrong</string>
+    <string name="please_try_again">Please try again</string>
+    <string name="try_again">Try Again</string>
 </resources>
