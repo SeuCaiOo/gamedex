@@ -4,10 +4,19 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import br.com.seucaio.gamedex.local.database.dao.PlatformsDao
+import br.com.seucaio.gamedex.local.database.dao.TopGamesDao
+import br.com.seucaio.gamedex.local.database.entity.GamePlatformEntity
+import br.com.seucaio.gamedex.local.database.entity.TopGameEntity
 
-@Database(entities = [GamePlatformEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [GamePlatformEntity::class, TopGameEntity::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class GameDexDatabase : RoomDatabase() {
     abstract fun platformsDao(): PlatformsDao
+    abstract fun topGamesDao(): TopGamesDao
 
     companion object {
         @Volatile

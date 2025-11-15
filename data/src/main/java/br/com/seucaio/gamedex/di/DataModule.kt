@@ -1,7 +1,7 @@
 package br.com.seucaio.gamedex.di
 
 import br.com.seucaio.gamedex.local.database.GameDexDatabase
-import br.com.seucaio.gamedex.local.database.PlatformsDao
+import br.com.seucaio.gamedex.local.database.dao.PlatformsDao
 import br.com.seucaio.gamedex.local.source.PlatformsLocalDataSource
 import br.com.seucaio.gamedex.local.source.PlatformsLocalDataSourceImpl
 import br.com.seucaio.gamedex.remote.service.GameDexApiService

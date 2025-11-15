@@ -1,6 +1,6 @@
 package br.com.seucaio.gamedex.repository
 
-import br.com.seucaio.gamedex.local.database.GamePlatformEntity
+import br.com.seucaio.gamedex.local.database.entity.GamePlatformEntity
 import br.com.seucaio.gamedex.local.source.PlatformsLocalDataSource
 import br.com.seucaio.gamedex.mapper.GameDataMapper.toPlatformDetailDomain
 import br.com.seucaio.gamedex.mapper.GameDataMapper.toPlatformDomain
