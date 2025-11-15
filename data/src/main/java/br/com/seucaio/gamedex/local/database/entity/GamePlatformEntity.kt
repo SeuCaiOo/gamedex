@@ -18,4 +18,6 @@ data class GamePlatformEntity(
     val description: String,
     @ColumnInfo(name = "games_count")
     val gamesCount: Int
-)
+) {
+    fun setDescription(description: String): GamePlatformEntity = copy(description = description)
+}
