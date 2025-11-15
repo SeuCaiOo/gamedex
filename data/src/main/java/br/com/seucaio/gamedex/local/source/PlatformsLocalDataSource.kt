@@ -10,11 +10,9 @@ import kotlinx.coroutines.withContext
 
 interface PlatformsLocalDataSource {
     suspend fun getAll(): List<GamePlatformEntity>
-    suspend fun getById(id: Int): GamePlatformEntity?
     suspend fun getByPlatformId(platformId: Int): GamePlatformEntity?
     suspend fun clearAndCache(platforms: List<GamePlatformEntity>)
-    suspend fun update(platform: GamePlatformEntity)
-
+    suspend fun updatePlatform(platform: GamePlatformEntity)
     suspend fun clearAndCacheTopGames(topGames: List<TopGameEntity>)
     suspend fun getTopGamesByPlatform(platformId: Int): List<TopGameEntity>
 }
@@ -28,10 +26,6 @@ class PlatformsLocalDataSourceImpl(
         return withContext(ioDispatcher) { dao.getAll() }
     }
 
-    override suspend fun getById(id: Int): GamePlatformEntity? {
-        return withContext(ioDispatcher) { dao.getById(id) }
-    }
-
     override suspend fun getByPlatformId(platformId: Int): GamePlatformEntity? {
         return withContext(ioDispatcher) { dao.getByPlatformId(platformId) }
     }
@@ -43,7 +37,7 @@ class PlatformsLocalDataSourceImpl(
         }
     }
 
-    override suspend fun update(platform: GamePlatformEntity) {
+    override suspend fun updatePlatform(platform: GamePlatformEntity) {
         return withContext(ioDispatcher) { dao.update(platform) }
     }
 
