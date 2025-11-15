@@ -71,6 +71,7 @@ dependencies {
 
     testImplementation(libs.bundles.unitTest)
     testImplementation(libs.mockwebserver)
+    testImplementation(libs.bundles.koinTest)
 
     androidTestImplementation(libs.bundles.unitTest)
     androidTestImplementation(platform(libs.androidx.compose.bom))
