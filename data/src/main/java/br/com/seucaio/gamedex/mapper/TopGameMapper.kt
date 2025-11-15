@@ -5,7 +5,7 @@ import br.com.seucaio.gamedex.model.data.TopGameData
 
 object TopGameMapper {
 
-    fun TopGameEntity.toDomain(): TopGameData = TopGameData(id = id, name = name)
+    fun TopGameEntity.toDomain(): TopGameData = TopGameData(id = gameId, name = name)
 
     fun List<TopGameEntity>.toDomain(): List<TopGameData> = map { it.toDomain() }
 
