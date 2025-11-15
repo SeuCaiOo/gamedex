@@ -139,39 +139,4 @@ class ConnectivityCheckerTest {
 
     // endregion
 
-    // region executeNetworkRequest Tests
-
-    @Test
-    fun `executeNetworkRequest should return result on success`() = runTest {
-        // Given
-        val expectedResult = "Success"
-        val onAction = suspend { expectedResult }
-        val onError = { _: Throwable -> RuntimeException("Should not be called") }
-
-        // When
-        val result = connectivityChecker.executeNetworkRequest(onAction, onError)
-
-        // Then
-        assertEquals(expectedResult, result)
-    }
-
-    @Test
-    fun `executeNetworkRequest should throw custom exception on error`() = runTest {
-        // Given
-        class CustomException(message: String) : Exception(message)
-
-        val originalException = RuntimeException("Original Error")
-        val onAction = suspend { throw originalException }
-        val onError = { throwable: Throwable ->
-            CustomException("Mapped: ${throwable.message}")
-        }
-
-        // When / Then
-        val exception = assertFailsWith<CustomException> {
-            connectivityChecker.executeNetworkRequest(onAction, onError)
-        }
-        assertEquals("Mapped: Original Error", exception.message)
-    }
-
-    // endregion
 }

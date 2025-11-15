@@ -3,9 +3,6 @@ package br.com.seucaio.gamedex.core.network
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class ConnectivityChecker(context: Context) {
     private val connectivityManager =
@@ -27,19 +24,5 @@ class ConnectivityChecker(context: Context) {
         )
 
         return transportTypes.any { currentNetworkCapabilities.hasTransport(it) }
-    }
-
-    suspend fun <T, R : Exception> executeNetworkRequest(
-        onAction: suspend () -> T,
-        onError: (throwable: Throwable) -> R,
-        dispatcher: CoroutineDispatcher = Dispatchers.IO
-    ): T {
-        return withContext(dispatcher) {
-            try {
-                onAction.invoke()
-            } catch (e: Exception) {
-                throw onError.invoke(e)
-            }
-        }
     }
 }
