@@ -16,7 +16,7 @@ fun GameDexTitleText(
     modifier: Modifier = Modifier,
 ) {
     Text(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier,
         text = title,
         style = MaterialTheme.typography.headlineSmall,
         fontWeight = FontWeight.Bold
@@ -28,7 +28,7 @@ fun GameDexTitleText(
 private fun GameDexTitleTextPreview() {
     GameDexTheme {
         Surface {
-            GameDexTitleText(title = "Top Games")
+            GameDexTitleText(title = "Top Games", modifier = Modifier.fillMaxWidth())
         }
     }
 }
