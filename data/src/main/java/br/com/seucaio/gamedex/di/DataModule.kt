@@ -1,5 +1,6 @@
 package br.com.seucaio.gamedex.di
 
+import br.com.seucaio.gamedex.core.network.ConnectivityChecker
 import br.com.seucaio.gamedex.local.database.GameDexDatabase
 import br.com.seucaio.gamedex.local.database.dao.PlatformsDao
 import br.com.seucaio.gamedex.local.database.dao.TopGamesDao
@@ -14,12 +15,14 @@ import br.com.seucaio.gamedex.repository.PlatformsRepository
 import br.com.seucaio.gamedex.repository.PlatformsRepositoryImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
 fun provideDataModule() = module {
 
     // region Network
+    single { ConnectivityChecker(androidApplication()) }
     single<HttpLoggingInterceptor> { NetworkInterceptor.loggingInterceptor() }
     single<OkHttpClient> {
         RetrofitConfig.okHttpClient(interceptors = listOf(get<HttpLoggingInterceptor>()))
@@ -36,7 +39,10 @@ fun provideDataModule() = module {
 
     // region Data Source
     single<PlatformsRemoteDataSource> {
-        PlatformsRemoteDataSourceImpl(apiService = get<GameDexApiService>())
+        PlatformsRemoteDataSourceImpl(
+            apiService = get<GameDexApiService>(),
+            connectivityChecker = get<ConnectivityChecker>()
+        )
     }
     single<PlatformsLocalDataSource> {
         PlatformsLocalDataSourceImpl(dao = get<PlatformsDao>(), topGamesDao = get<TopGamesDao>())
