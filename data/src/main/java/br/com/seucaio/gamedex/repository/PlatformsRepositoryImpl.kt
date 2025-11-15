@@ -59,7 +59,7 @@ class PlatformsRepositoryImpl(
 
             val entityToUpdate: GamePlatformEntity? = localDataSource.getByPlatformId(id)
             entityToUpdate?.let {
-                localDataSource.update(it.setDescription(remotePlatformDetail.description))
+                localDataSource.updatePlatform(it.setDescription(remotePlatformDetail.description))
             }
             return Result.success(remotePlatformDetail)
         } catch (e: Exception) {
