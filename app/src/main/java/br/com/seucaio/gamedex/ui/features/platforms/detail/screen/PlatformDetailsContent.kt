@@ -94,7 +94,7 @@ fun PlatformDetailsSuccessContent(
             )
             Spacer(modifier = Modifier.height(16.dp))
             LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                details.topGames.ifEmpty { item { Text("No top games found") } }
+                details.topGames.ifEmpty { item { Text(stringResource(R.string.no_top_games_found)) } }
                 items(details.topGames) { GameDexTopGameListItem(name = it.name) }
             }
         }

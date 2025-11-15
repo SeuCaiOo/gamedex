@@ -30,7 +30,8 @@ data class GamePlatformDetail(
                 (with a smaller body, no external power supply, and native HDR/4k support) 
                 and One X (pro-gamer-oriented system with updated hardware and 4k 
                 rendering in real time).""".trimIndent(),
-                gamesCount = 130
+                gamesCount = 130,
+                topGames = TopGameData.sampleList
             ),
             GamePlatformDetail(
                 id = 2,
