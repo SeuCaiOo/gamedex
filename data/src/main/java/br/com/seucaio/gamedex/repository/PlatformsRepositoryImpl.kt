@@ -1,14 +1,19 @@
 package br.com.seucaio.gamedex.repository
 
 import br.com.seucaio.gamedex.local.database.entity.GamePlatformEntity
+import br.com.seucaio.gamedex.local.database.entity.TopGameEntity
 import br.com.seucaio.gamedex.local.source.PlatformsLocalDataSource
 import br.com.seucaio.gamedex.mapper.GameDataMapper.toPlatformDetailDomain
 import br.com.seucaio.gamedex.mapper.GameDataMapper.toPlatformDomain
+import br.com.seucaio.gamedex.mapper.GameDataMapper.toTopGameEntity
 import br.com.seucaio.gamedex.mapper.PlatformsMapper.toDetailDomain
 import br.com.seucaio.gamedex.mapper.PlatformsMapper.toDomain
 import br.com.seucaio.gamedex.mapper.PlatformsMapper.toEntity
+import br.com.seucaio.gamedex.mapper.TopGameMapper.toDomain
+import br.com.seucaio.gamedex.model.data.TopGameData
 import br.com.seucaio.gamedex.model.platform.GamePlatform
 import br.com.seucaio.gamedex.model.platform.GamePlatformDetail
+import br.com.seucaio.gamedex.remote.dto.list.GameDataListInfoResponse
 import br.com.seucaio.gamedex.remote.source.PlatformsRemoteDataSource
 
 class PlatformsRepositoryImpl(
@@ -18,35 +23,50 @@ class PlatformsRepositoryImpl(
     override suspend fun getAll(): Result<List<GamePlatform>> {
         try {
             val localPlatforms: List<GamePlatformEntity> = localDataSource.getAll()
-
             if (localPlatforms.isNotEmpty()) return Result.success(localPlatforms.toDomain())
 
-            val remotePlatforms: List<GamePlatform> =
-                remoteDataSource.getAll().results.toPlatformDomain()
+            val remoteResults: List<GameDataListInfoResponse> = remoteDataSource.getAll().results
+            val remotePlatforms: List<GamePlatform> = remoteResults.toPlatformDomain()
+
             localDataSource.clearAndCache(remotePlatforms.toEntity())
+            saveCacheTopGames(remoteResults)
+
             return Result.success(remotePlatforms)
         } catch (e: Exception) {
             return Result.failure(e)
         }
     }
 
+    private suspend fun saveCacheTopGames(remoteResults: List<GameDataListInfoResponse>) {
+        val topGamesEntity = mutableListOf<TopGameEntity>()
+        remoteResults.forEach { info ->
+            info.games?.forEach { topGamesEntity.add(it.toTopGameEntity(platformId = info.id)) }
+        }
+        localDataSource.clearAndCacheTopGames(topGamesEntity)
+    }
+
     override suspend fun getById(id: Int): Result<GamePlatformDetail> {
         try {
             val platformEntity: GamePlatformEntity? = localDataSource.getByPlatformId(id)
+            val topGamesCache: List<TopGameData> = getTopGamesPlatformCache(id).toDomain()
+
             if (platformEntity != null && platformEntity.description.isNotBlank()) {
-                return Result.success(platformEntity.toDetailDomain())
+                return Result.success(platformEntity.toDetailDomain(topGamesCache))
             }
 
             val remotePlatformDetail: GamePlatformDetail =
-                remoteDataSource.getById(id).toPlatformDetailDomain()
+                remoteDataSource.getById(id).toPlatformDetailDomain(topGamesCache)
 
-            val entityToUpdate = localDataSource.getByPlatformId(id)
+            val entityToUpdate: GamePlatformEntity? = localDataSource.getByPlatformId(id)
             entityToUpdate?.let {
-                localDataSource.update(it.copy(description = remotePlatformDetail.description))
+                localDataSource.update(it.setDescription(remotePlatformDetail.description))
             }
             return Result.success(remotePlatformDetail)
         } catch (e: Exception) {
             return Result.failure(e)
         }
     }
+
+    private suspend fun getTopGamesPlatformCache(platformId: Int) =
+        localDataSource.getTopGamesByPlatform(platformId)
 }
