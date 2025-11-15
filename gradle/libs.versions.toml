@@ -44,6 +44,8 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 # Koin
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroid" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinAndroid" }
+koin-test-junit4 = { module = "io.insert-koin:koin-test-junit4", version.ref = "koinAndroid" }
 
 # Retrofit
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
@@ -75,6 +77,7 @@ kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [bundles]
 koin = ["koin-android", "koin-compose"]
+koinTest = ["koin-test", "koin-test-junit4"]
 retrofit = ["retrofit", "retrofit-serialization-converter", "logging-interceptor"]
 room = ["androidx-room-runtime", "androidx-room-ktx"]
 unitTest = ["junit", "kotlinx-coroutines-test", "kotlin-test", "mockk"]
