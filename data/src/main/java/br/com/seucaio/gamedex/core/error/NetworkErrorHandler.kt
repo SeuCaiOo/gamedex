@@ -9,7 +9,7 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 object NetworkErrorHandler {
-    fun Throwable.handleError(isNetworkAvailable: Boolean): DomainException {
+    fun Throwable.handleNetworkError(isNetworkAvailable: Boolean): DomainException {
         if (!isNetworkAvailable) return DomainException.NetworkUnavailableException(cause)
         return when (val throwable = cause) {
             is UnknownHostException,
