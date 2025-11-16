@@ -13,6 +13,8 @@ import br.com.seucaio.gamedex.remote.source.GamesRemoteDatSource
 import br.com.seucaio.gamedex.remote.source.GamesRemoteDataSourceImpl
 import br.com.seucaio.gamedex.remote.source.PlatformsRemoteDataSource
 import br.com.seucaio.gamedex.remote.source.PlatformsRemoteDataSourceImpl
+import br.com.seucaio.gamedex.repository.GamesRepository
+import br.com.seucaio.gamedex.repository.GamesRepositoryImpl
 import br.com.seucaio.gamedex.repository.PlatformsRepository
 import br.com.seucaio.gamedex.repository.PlatformsRepositoryImpl
 import okhttp3.OkHttpClient
@@ -63,5 +65,9 @@ fun provideDataModule() = module {
             remoteDataSource = get<PlatformsRemoteDataSource>(),
             localDataSource = get<PlatformsLocalDataSource>()
         )
+    }
+
+    single<GamesRepository> {
+        GamesRepositoryImpl(remoteDataSource = get<GamesRemoteDatSource>())
     }
 }
