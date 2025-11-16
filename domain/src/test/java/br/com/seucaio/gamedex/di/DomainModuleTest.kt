@@ -1,5 +1,6 @@
 package br.com.seucaio.gamedex.di
 
+import br.com.seucaio.gamedex.repository.GamesRepository
 import br.com.seucaio.gamedex.repository.GenresRepository
 import br.com.seucaio.gamedex.repository.PlatformsRepository
 import io.mockk.mockk
@@ -16,6 +17,7 @@ class DomainModuleTest : KoinTest {
             modules(provideDomainModule(), module {
                 single { mockk<PlatformsRepository>() }
                 single { mockk<GenresRepository>() }
+                single { mockk<GamesRepository>() }
             })
         }
     }
