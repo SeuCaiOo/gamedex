@@ -1,11 +1,12 @@
 package br.com.seucaio.gamedex.model.platform
 
 import br.com.seucaio.gamedex.model.data.GameData
+import br.com.seucaio.gamedex.util.extension.ZERO
 
 data class GamePlatform(
     override val id: Int,
     override val name: String,
-    override val gamesCount: Int
+    val gamesCount: Int = Int.ZERO
 ) : GameData {
     companion object {
         val sampleList = listOf(

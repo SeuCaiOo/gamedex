@@ -9,8 +9,12 @@ import br.com.seucaio.gamedex.local.source.PlatformsLocalDataSourceImpl
 import br.com.seucaio.gamedex.remote.service.GameDexApiService
 import br.com.seucaio.gamedex.remote.service.RetrofitConfig
 import br.com.seucaio.gamedex.remote.service.interceptor.NetworkInterceptor
+import br.com.seucaio.gamedex.remote.source.GamesRemoteDatSource
+import br.com.seucaio.gamedex.remote.source.GamesRemoteDataSourceImpl
 import br.com.seucaio.gamedex.remote.source.PlatformsRemoteDataSource
 import br.com.seucaio.gamedex.remote.source.PlatformsRemoteDataSourceImpl
+import br.com.seucaio.gamedex.repository.GamesRepository
+import br.com.seucaio.gamedex.repository.GamesRepositoryImpl
 import br.com.seucaio.gamedex.repository.PlatformsRepository
 import br.com.seucaio.gamedex.repository.PlatformsRepositoryImpl
 import okhttp3.OkHttpClient
@@ -47,6 +51,13 @@ fun provideDataModule() = module {
     single<PlatformsLocalDataSource> {
         PlatformsLocalDataSourceImpl(dao = get<PlatformsDao>(), topGamesDao = get<TopGamesDao>())
     }
+
+    single<GamesRemoteDatSource> {
+        GamesRemoteDataSourceImpl(
+            apiService = get<GameDexApiService>(),
+            connectivityChecker = get<ConnectivityChecker>()
+        )
+    }
     // endregion
 
     single<PlatformsRepository> {
@@ -54,5 +65,9 @@ fun provideDataModule() = module {
             remoteDataSource = get<PlatformsRemoteDataSource>(),
             localDataSource = get<PlatformsLocalDataSource>()
         )
+    }
+
+    single<GamesRepository> {
+        GamesRepositoryImpl(remoteDataSource = get<GamesRemoteDatSource>())
     }
 }
