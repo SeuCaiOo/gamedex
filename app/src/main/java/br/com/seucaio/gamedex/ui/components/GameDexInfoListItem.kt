@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import br.com.seucaio.gamedex.ui.theme.GameDexTheme
 
 @Composable
-fun GameDexTopGameListItem(
+fun GameDexInfoListItem(
     name: String,
     modifier: Modifier = Modifier,
     onItemClick: () -> Unit = {},
@@ -48,10 +48,10 @@ fun GameDexTopGameListItem(
 
 @PreviewLightDark
 @Composable
-private fun GameDexTopGameListItemPreview() {
+private fun GameDexInfoListItemPreview() {
     GameDexTheme {
         Surface {
-            GameDexTopGameListItem(name = "Grand Theft Auto - San Andreas")
+            GameDexInfoListItem(name = "Grand Theft Auto - San Andreas")
         }
     }
 }
