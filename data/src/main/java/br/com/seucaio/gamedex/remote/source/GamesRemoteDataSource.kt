@@ -31,6 +31,7 @@ class GamesRemoteDataSourceImpl(
         return safeApiCall { apiService.getGameById(id) }
     }
 
+    // TODO remove duplication
     private suspend fun <T> safeApiCall(block: suspend () -> T): T {
         return withContext(ioDispatcher) {
             try {
