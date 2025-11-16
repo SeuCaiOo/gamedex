@@ -21,10 +21,14 @@ import br.com.seucaio.gamedex.ui.theme.GameDexTheme
 
 @Composable
 fun GameDexTopGameListItem(
-    modifier: Modifier = Modifier,
     name: String,
+    modifier: Modifier = Modifier,
+    onItemClick: () -> Unit = {},
 ) {
-    Card(modifier = modifier.size(120.dp)) {
+    Card(
+        modifier = modifier.size(120.dp),
+        onClick = onItemClick
+    ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Text(
                 modifier = Modifier
