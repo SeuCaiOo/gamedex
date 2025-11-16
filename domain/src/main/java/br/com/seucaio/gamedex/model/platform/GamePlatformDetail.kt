@@ -8,8 +8,8 @@ data class GamePlatformDetail(
     override val name: String,
     override val description: String,
     override val imageBackground: String? = null,
-    override val gamesCount: Int,
-    override val topGames: List<TopGameData> = emptyList()
+    val gamesCount: Int,
+    val topGames: List<TopGameData> = emptyList()
 ) : GameDataDetail {
 
     fun setTopGames(topGames: List<TopGameData>): GamePlatformDetail {

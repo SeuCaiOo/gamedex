@@ -8,8 +8,8 @@ data class GameGenreDetail(
     override val name: String,
     override val description: String,
     override val imageBackground: String? = null,
-    override val gamesCount: Int,
-    override val topGames: List<TopGameData> = TopGameData.sampleList
+    val gamesCount: Int,
+    val topGames: List<TopGameData> = TopGameData.sampleList
 ) : GameDataDetail {
     companion object {
         val sampleList = listOf(

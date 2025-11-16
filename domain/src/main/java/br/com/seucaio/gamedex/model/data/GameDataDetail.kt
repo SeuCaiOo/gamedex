@@ -5,7 +5,5 @@ interface GameDataDetail {
     val name: String
     val description: String
     val imageBackground: String?
-    val gamesCount: Int
-    val topGames: List<TopGameData>
 }
 
