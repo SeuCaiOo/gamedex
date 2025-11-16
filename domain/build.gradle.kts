@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
     alias(libs.plugins.jetbrains.kotlin.jvm)
+    alias(libs.plugins.kotlinx.kover)
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -18,4 +19,6 @@ dependencies {
 
     testImplementation(libs.bundles.unitTest)
     testImplementation(libs.bundles.koinTest)
+
+    detektPlugins(libs.detekt.formatting)
 }
