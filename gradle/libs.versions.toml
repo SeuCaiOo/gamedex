@@ -25,6 +25,7 @@ coreTesting="2.2.0"
 turbine = "1.1.0"
 detekt = "1.23.8"
 detektCompose = "0.4.23"
+kover="0.9.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -86,7 +87,7 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrai
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-detekt-formatting = { id = "io.gitlab.arturbosch.detekt.formatting", version.ref = "detekt" }
+kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 
 [bundles]
 koin = ["koin-android", "koin-compose"]
