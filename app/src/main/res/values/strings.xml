@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">GameDex</string>
     <string name="platforms">Platforms</string>
+    <string name="games">Games</string>
     <string name="back">Back</string>
     <string name="no_description">No description</string>
     <string name="no_games">No games</string>
