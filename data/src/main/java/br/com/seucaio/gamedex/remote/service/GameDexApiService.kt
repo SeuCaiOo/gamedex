@@ -12,7 +12,7 @@ interface GameDexApiService {
     suspend fun getPlatforms(
         @Query("key") apiKey: String = API_KEY,
         @Query("page") page: Int = 1,
-        @Query("page_size") pageSize: Int = 50
+        @Query("page_size") pageSize: Int = 40
     ): GameDataListResponse
 
     @GET("platforms/{id}")
@@ -22,8 +22,22 @@ interface GameDexApiService {
     ): GameDataInfoResponse
 
 
-    @GET("/games")
-    suspend fun getGames(@Query("key") apiKey: String)
+    @GET("games")
+    suspend fun searchGamesByPlatform(
+        @Query("search") query: String,
+        @Query("platforms") singlePlatformId: Int,
+        @Query("key") apiKey: String = API_KEY,
+        @Query("page") page: Int = 1,
+        @Query("page_size") pageSize: Int = 40,
+        @Query("search_exact") searchExact: Boolean = true,
+        @Query("search_precise") searchPrecise: Boolean = true,
+    ) : GameDataListResponse
+
+    @GET("games/{id}")
+    suspend fun getGameById(
+        @Path("id") gameId: Int,
+        @Query("key") apiKey: String = API_KEY
+    ) : GameDataInfoResponse
 
     companion object {
         private const val API_KEY = BuildConfig.API_KEY
