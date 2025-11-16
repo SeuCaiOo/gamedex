@@ -25,7 +25,11 @@ fun GameDexNavGraph(
         composable<GameDexRoute.Home> {
             HomeScreen(
                 onNavigateToPlatforms = { navController.navigate(GameDexRoute.PlatformList) },
-                onNavigateToGames = { navController.navigate(GameDexRoute.GameList) }
+                onNavigateToGames = {
+                    navController.navigate(
+                        GameDexRoute.GameList(platformId = 4, gameQuery = "Forza Horizon")
+                    )
+                }
             )
         }
 
@@ -42,12 +46,20 @@ fun GameDexNavGraph(
             val platformId: Int = platform.id
             PlatformDetailsScreen(
                 platformId = platformId,
-                onNavigateBack = { navController.popBackStack() }
+                onNavigateBack = { navController.popBackStack() },
+                onNavigateToGameDetails = { gameId ->
+                    navController.navigate(GameDexRoute.GameDetails(gameId))
+                }
             )
         }
 
         composable<GameDexRoute.GameList> {
+            val game = it.toRoute<GameDexRoute.GameList>()
+            val platformId: Int = game.platformId
+            val gameQuery: String = game.gameQuery
             GameListScreen(
+                platformId = platformId,
+                gameQuery = gameQuery,
                 onNavigateToDetail = { gameId ->
                     navController.navigate(GameDexRoute.GameDetails(gameId))
                 }

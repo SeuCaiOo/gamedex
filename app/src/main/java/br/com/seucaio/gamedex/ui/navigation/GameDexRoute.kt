@@ -14,7 +14,7 @@ sealed interface GameDexRoute {
     data class PlatformDetails(val id: Int) : GameDexRoute
 
     @Serializable
-    data object GameList : GameDexRoute
+    data class GameList(val platformId: Int, val gameQuery: String = "") : GameDexRoute
 
     @Serializable
     data class GameDetails(val id: Int) : GameDexRoute
