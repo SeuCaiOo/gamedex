@@ -21,6 +21,10 @@ object GameDataMapper {
         return map { it.toPlatformDomain() }
     }
 
+    fun GameDataListInfoResponse.toTopGameDomain(): TopGameData {
+        return TopGameData(id = id, name = name)
+    }
+
     fun GameDataInfoResponse.toPlatformDetailDomain(
         topGames: List<TopGameData> = emptyList()
     ): GamePlatformDetail {
