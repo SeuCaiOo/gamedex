@@ -23,6 +23,8 @@ kotlinTest = "1.9.23"
 mockWebServer = "4.12.0"
 coreTesting="2.2.0"
 turbine = "1.1.0"
+detekt = "1.23.8"
+detektCompose = "0.4.23"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -71,6 +73,9 @@ mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", versio
 androidx-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "coreTesting" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
+detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
+detekt-compose-rules = { group = "io.nlopez.compose.rules", name = "detekt", version.ref = "detektCompose" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -80,6 +85,8 @@ kotlin-parcelize = { id = "kotlin-parcelize" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+detekt-formatting = { id = "io.gitlab.arturbosch.detekt.formatting", version.ref = "detekt" }
 
 [bundles]
 koin = ["koin-android", "koin-compose"]
@@ -89,3 +96,4 @@ room = ["androidx-room-runtime", "androidx-room-ktx"]
 unitTest = ["junit", "kotlinx-coroutines-test", "kotlin-test", "mockk"]
 unitTestAndroid = ["androidx-core-testing", "turbine"]
 androidTest = ["androidx-junit", "androidx-espresso-core"]
+detekt = ["detekt-formatting", "detekt-compose-rules"]
