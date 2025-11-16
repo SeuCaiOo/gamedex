@@ -6,10 +6,10 @@ import br.com.seucaio.gamedex.model.data.TopGameData
 data class GameGenreDetail(
     override val id: Int,
     override val name: String,
-    override val description: String,
     override val imageBackground: String? = null,
+    val description: String,
     val gamesCount: Int,
-    val topGames: List<TopGameData> = TopGameData.sampleList
+    val topGames: List<TopGameData> = emptyList()
 ) : GameDataDetail {
     companion object {
         val sampleList = listOf(
@@ -23,7 +23,8 @@ data class GameGenreDetail(
                 the vehicle than keyboard/mouse pair. Although car avatars may render 
                 real-life examples, there are many instances where spaceships, formless
                 mechanisms and other fantastical entities take the role of the avatar. """.trimIndent(),
-                gamesCount = 257626
+                gamesCount = 257626,
+                topGames = TopGameData.sampleList
             ),
             GameGenreDetail(id = 2, name = "Action RPG", description = "", gamesCount = 150),
             GameGenreDetail(id = 3, name = "Adventure", description = "", gamesCount = 200),

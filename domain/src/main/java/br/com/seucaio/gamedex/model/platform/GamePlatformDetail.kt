@@ -6,8 +6,8 @@ import br.com.seucaio.gamedex.model.data.TopGameData
 data class GamePlatformDetail(
     override val id: Int,
     override val name: String,
-    override val description: String,
     override val imageBackground: String? = null,
+    val description: String,
     val gamesCount: Int,
     val topGames: List<TopGameData> = emptyList()
 ) : GameDataDetail {
