@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlinx.kover)
 }
 
 android {
@@ -78,4 +79,12 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     detektPlugins(libs.bundles.detekt)
+}
+
+// Configure Kover to generate an aggregated report for all modules.
+kover {
+    dependencies {
+        kover(project(":domain"))
+        kover(project(":data"))
+    }
 }
