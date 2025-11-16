@@ -1,7 +1,5 @@
 package br.com.seucaio.gamedex.remote.service
 
-import br.com.seucaio.gamedex.data.BuildConfig
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
@@ -9,6 +7,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
+import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitConfig {
@@ -18,17 +17,9 @@ object RetrofitConfig {
     fun jsonConverterFactory(): Converter.Factory {
         val contentType = JSON_MEDIA_TYPE.toMediaType()
 
-        val json = if (BuildConfig.DEBUG) {
-            Json {
-                encodeDefaults = true
-                ignoreUnknownKeys = true
-                isLenient = true
-            }
-        } else {
-            Json {
-                encodeDefaults = true
-                ignoreUnknownKeys = true
-            }
+        val json = Json {
+            encodeDefaults = true
+            ignoreUnknownKeys = true
         }
         return json.asConverterFactory(contentType)
     }
