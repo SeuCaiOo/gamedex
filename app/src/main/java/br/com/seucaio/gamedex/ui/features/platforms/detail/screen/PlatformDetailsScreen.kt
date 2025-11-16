@@ -16,6 +16,7 @@ import org.koin.core.parameter.parametersOf
 fun PlatformDetailsScreen(
     platformId: Int,
     onNavigateBack: () -> Unit,
+    onNavigateToGameDetails: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: PlatformDetailsViewModel = koinViewModel { parametersOf(platformId) }
 ) {
@@ -25,6 +26,9 @@ fun PlatformDetailsScreen(
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is PlatformDetailsUiEvent.NavigateBack -> onNavigateBack()
+                is PlatformDetailsUiEvent.NavigateToGameDetails -> {
+                    onNavigateToGameDetails(event.gameId)
+                }
             }
         }
     }
