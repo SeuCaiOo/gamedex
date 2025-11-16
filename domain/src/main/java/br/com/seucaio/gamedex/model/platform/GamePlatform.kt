@@ -5,7 +5,7 @@ import br.com.seucaio.gamedex.model.data.GameData
 data class GamePlatform(
     override val id: Int,
     override val name: String,
-    override val gamesCount: Int
+    val gamesCount: Int
 ) : GameData {
     companion object {
         val sampleList = listOf(
