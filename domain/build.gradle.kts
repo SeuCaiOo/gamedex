@@ -18,4 +18,6 @@ dependencies {
 
     testImplementation(libs.bundles.unitTest)
     testImplementation(libs.bundles.koinTest)
+
+    detektPlugins(libs.detekt.formatting)
 }
