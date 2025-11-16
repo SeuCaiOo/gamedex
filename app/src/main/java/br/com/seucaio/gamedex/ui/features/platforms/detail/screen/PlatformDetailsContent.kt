@@ -28,7 +28,7 @@ import br.com.seucaio.gamedex.ui.components.GameDexErrorContent
 import br.com.seucaio.gamedex.ui.components.GameDexGameCountInfo
 import br.com.seucaio.gamedex.ui.components.GameDexLoadingContent
 import br.com.seucaio.gamedex.ui.components.GameDexTitleText
-import br.com.seucaio.gamedex.ui.components.GameDexTopGameListItem
+import br.com.seucaio.gamedex.ui.components.GameDexInfoListItem
 import br.com.seucaio.gamedex.ui.features.platforms.detail.viewmodel.PlatformDetailsUiAction
 import br.com.seucaio.gamedex.ui.features.platforms.detail.viewmodel.PlatformDetailsUiState
 import br.com.seucaio.gamedex.ui.theme.GameDexTheme
@@ -102,7 +102,7 @@ fun PlatformDetailsSuccessContent(
             LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                 details.topGames.ifEmpty { item { Text(stringResource(R.string.no_top_games_found)) } }
                 items(details.topGames) {
-                    GameDexTopGameListItem(name = it.name, onItemClick = { onGameClick(it.id) })
+                    GameDexInfoListItem(name = it.name, onItemClick = { onGameClick(it.id) })
                 }
             }
         }
