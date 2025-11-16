@@ -32,6 +32,7 @@ class PlatformDetailsViewModel(
             is PlatformDetailsUiAction.GetPlatformById -> getGamePlatformById()
             is PlatformDetailsUiAction.RetryLoadPlatform -> getGamePlatformById()
             is PlatformDetailsUiAction.OnBackClick -> navigateBack()
+            is PlatformDetailsUiAction.OnGameClick -> navigateToGameDetails(action.gameId)
         }
     }
 
@@ -48,6 +49,12 @@ class PlatformDetailsViewModel(
 
     private fun navigateBack() {
         viewModelScope.launch { _uiEvent.emit(PlatformDetailsUiEvent.NavigateBack) }
+    }
+
+    private fun navigateToGameDetails(gameId: Int) {
+        viewModelScope.launch {
+            _uiEvent.emit(PlatformDetailsUiEvent.NavigateToGameDetails(gameId))
+        }
     }
 }
 

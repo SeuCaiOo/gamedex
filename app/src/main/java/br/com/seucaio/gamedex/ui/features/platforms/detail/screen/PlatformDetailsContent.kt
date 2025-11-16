@@ -28,7 +28,7 @@ import br.com.seucaio.gamedex.ui.components.GameDexErrorContent
 import br.com.seucaio.gamedex.ui.components.GameDexGameCountInfo
 import br.com.seucaio.gamedex.ui.components.GameDexLoadingContent
 import br.com.seucaio.gamedex.ui.components.GameDexTitleText
-import br.com.seucaio.gamedex.ui.components.GameDexTopGameListItem
+import br.com.seucaio.gamedex.ui.components.GameDexInfoListItem
 import br.com.seucaio.gamedex.ui.features.platforms.detail.viewmodel.PlatformDetailsUiAction
 import br.com.seucaio.gamedex.ui.features.platforms.detail.viewmodel.PlatformDetailsUiState
 import br.com.seucaio.gamedex.ui.theme.GameDexTheme
@@ -42,7 +42,12 @@ fun PlatformDetailsContent(
     Surface(modifier = modifier) {
         when {
             state.platformDetail != null -> {
-                PlatformDetailsSuccessContent(details = state.platformDetail)
+                PlatformDetailsSuccessContent(
+                    details = state.platformDetail,
+                    onGameClick = { gameId ->
+                        onAction(PlatformDetailsUiAction.OnGameClick(gameId))
+                    }
+                )
             }
 
             !state.errorMessage.isNullOrBlank() -> {
@@ -61,6 +66,7 @@ fun PlatformDetailsContent(
 @Composable
 fun PlatformDetailsSuccessContent(
     details: GamePlatformDetail,
+    onGameClick: (Int) -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     val scrollState = rememberScrollState()
@@ -95,7 +101,9 @@ fun PlatformDetailsSuccessContent(
             Spacer(modifier = Modifier.height(16.dp))
             LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                 details.topGames.ifEmpty { item { Text(stringResource(R.string.no_top_games_found)) } }
-                items(details.topGames) { GameDexTopGameListItem(name = it.name) }
+                items(details.topGames) {
+                    GameDexInfoListItem(name = it.name, onItemClick = { onGameClick(it.id) })
+                }
             }
         }
     }
