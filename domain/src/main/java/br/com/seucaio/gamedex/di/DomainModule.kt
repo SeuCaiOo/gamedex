@@ -1,7 +1,10 @@
 package br.com.seucaio.gamedex.di
 
+import br.com.seucaio.gamedex.repository.GamesRepository
 import br.com.seucaio.gamedex.repository.GenresRepository
 import br.com.seucaio.gamedex.repository.PlatformsRepository
+import br.com.seucaio.gamedex.usecase.game.GetGameDetailByIdUseCase
+import br.com.seucaio.gamedex.usecase.game.GetGamesByPlatformByIdUseCase
 import br.com.seucaio.gamedex.usecase.genre.GetGenreDetailByIdUseCase
 import br.com.seucaio.gamedex.usecase.genre.GetGenresUseCase
 import br.com.seucaio.gamedex.usecase.platform.GetPlatformDetailByIdUseCase
@@ -13,4 +16,6 @@ fun provideDomainModule() = module {
     factory { GetGenreDetailByIdUseCase(repository = get<GenresRepository>()) }
     factory { GetPlatformsUseCase(repository = get<PlatformsRepository>()) }
     factory { GetPlatformDetailByIdUseCase(repository = get<PlatformsRepository>()) }
+    factory { GetGamesByPlatformByIdUseCase(repository = get<GamesRepository>()) }
+    factory { GetGameDetailByIdUseCase(repository = get<GamesRepository>()) }
 }

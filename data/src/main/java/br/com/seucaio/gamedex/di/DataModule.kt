@@ -9,6 +9,8 @@ import br.com.seucaio.gamedex.local.source.PlatformsLocalDataSourceImpl
 import br.com.seucaio.gamedex.remote.service.GameDexApiService
 import br.com.seucaio.gamedex.remote.service.RetrofitConfig
 import br.com.seucaio.gamedex.remote.service.interceptor.NetworkInterceptor
+import br.com.seucaio.gamedex.remote.source.GamesRemoteDatSource
+import br.com.seucaio.gamedex.remote.source.GamesRemoteDataSourceImpl
 import br.com.seucaio.gamedex.remote.source.PlatformsRemoteDataSource
 import br.com.seucaio.gamedex.remote.source.PlatformsRemoteDataSourceImpl
 import br.com.seucaio.gamedex.repository.PlatformsRepository
@@ -46,6 +48,13 @@ fun provideDataModule() = module {
     }
     single<PlatformsLocalDataSource> {
         PlatformsLocalDataSourceImpl(dao = get<PlatformsDao>(), topGamesDao = get<TopGamesDao>())
+    }
+
+    single<GamesRemoteDatSource> {
+        GamesRemoteDataSourceImpl(
+            apiService = get<GameDexApiService>(),
+            connectivityChecker = get<ConnectivityChecker>()
+        )
     }
     // endregion
 
