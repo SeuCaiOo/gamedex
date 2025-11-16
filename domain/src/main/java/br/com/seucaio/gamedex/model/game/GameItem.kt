@@ -4,7 +4,7 @@ import br.com.seucaio.gamedex.model.data.GameData
 import br.com.seucaio.gamedex.util.extension.EMPTY
 import br.com.seucaio.gamedex.util.extension.ZERO
 
-class GameItem(
+data class GameItem(
     override val id: Int,
     override val name: String,
     val imageBackground: String = String.EMPTY,
@@ -16,5 +16,4 @@ class GameItem(
     val genres: List<GameData> = emptyList(),
     val esrbRating: GameData? = null,
     val shortScreenshots: List<GameScreenshot> = emptyList(),
-) : GameData {
-}
+) : GameData
