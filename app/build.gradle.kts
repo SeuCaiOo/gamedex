@@ -5,6 +5,15 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlinx.kover)
+    alias(libs.plugins.jacoco)
+}
+
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+apply {
+    from("../config/jacoco/jacoco.gradle.kts")
 }
 
 android {
@@ -24,14 +33,23 @@ android {
     }
 
     buildTypes {
+        debug {
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            enableUnitTestCoverage = false
+            enableAndroidTestCoverage = false
         }
     }
+
+    testCoverage.jacocoVersion = "0.8.12"
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -78,6 +96,7 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+    debugImplementation(libs.leakcanary)
 
     detektPlugins(libs.bundles.detekt)
 }
