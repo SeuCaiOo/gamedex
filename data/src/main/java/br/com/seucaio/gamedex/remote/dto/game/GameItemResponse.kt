@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 data class GameItemResponse(
     val id: Int,
     val name: String,
-    @SerialName("image_background")
+    @SerialName("background_image")
     val imageBackground: String? = null,
     val metacritic: Int? = null,
     val released: String? = null,
