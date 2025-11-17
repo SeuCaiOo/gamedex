@@ -21,6 +21,7 @@ import br.com.seucaio.gamedex.ui.theme.GameDexTheme
 fun HomeScreen(
     modifier: Modifier = Modifier,
     onNavigateToPlatforms: () -> Unit = {},
+    onNavigateToGames: () -> Unit = {}
 ) {
     Column(
         modifier = modifier
@@ -30,6 +31,9 @@ fun HomeScreen(
     ) {
         Button(onNavigateToPlatforms, modifier = Modifier.fillMaxWidth()) {
             Text(stringResource(R.string.platforms))
+        }
+        Button(onNavigateToGames, modifier = Modifier.fillMaxWidth()) {
+            Text(stringResource(R.string.games))
         }
     }
 }

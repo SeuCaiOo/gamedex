@@ -15,5 +15,5 @@ data class GameDataListInfoResponse(
     @SerialName("image_background")
     val imageBackground: String? = null,
     @EncodeDefault
-    val games: List<GameDataListInfoGamesResponse>? = emptyList()
+    val games: List<GameDataListInfoGamesResponse>? = null
 )

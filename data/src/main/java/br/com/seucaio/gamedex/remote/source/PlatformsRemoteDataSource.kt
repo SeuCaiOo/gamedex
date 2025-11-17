@@ -27,7 +27,7 @@ class PlatformsRemoteDataSourceImpl(
         return safeApiCall { apiService.getPlatformById(id) }
     }
 
-
+    // TODO remove duplication
     private suspend fun <T> safeApiCall(block: suspend () -> T): T {
         return withContext(ioDispatcher) {
             try {

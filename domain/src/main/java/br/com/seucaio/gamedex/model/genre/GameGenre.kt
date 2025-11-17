@@ -1,9 +1,12 @@
 package br.com.seucaio.gamedex.model.genre
 
 import br.com.seucaio.gamedex.model.data.GameData
+import br.com.seucaio.gamedex.util.extension.ZERO
 
 data class GameGenre(
-    override val id: Int, override val name: String, override val gamesCount: Int
+    override val id: Int,
+    override val name: String,
+    val gamesCount: Int = Int.ZERO
 ) : GameData {
     companion object {
         val sampleList = listOf(
