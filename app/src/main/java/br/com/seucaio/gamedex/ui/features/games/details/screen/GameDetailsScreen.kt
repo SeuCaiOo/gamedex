@@ -1,44 +1,35 @@
 package br.com.seucaio.gamedex.ui.features.games.details.screen
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.unit.dp
-import br.com.seucaio.gamedex.ui.theme.GameDexTheme
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import br.com.seucaio.gamedex.ui.features.games.details.viewmodel.GameDetailsUiEvent
+import br.com.seucaio.gamedex.ui.features.games.details.viewmodel.GameDetailsViewModel
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun GameDetailsScreen(
     gameId: Int,
     onNavigateBack: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: GameDetailsViewModel = koinViewModel { parametersOf(gameId) }
 ) {
-    val scrollState = rememberScrollState()
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Surface(modifier = modifier) {
-        Column(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp)
-                .verticalScroll(scrollState)
-        ) {
-
+    LaunchedEffect(Unit) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is GameDetailsUiEvent.NavigateBack -> onNavigateBack()
+            }
         }
     }
-}
 
-@PreviewLightDark
-@Composable
-private fun GameDetailsScreenPreview() {
-    GameDexTheme {
-        GameDetailsScreen(
-            gameId = 1,
-            onNavigateBack = {}
-        )
-    }
+    GameDetailsContent(
+        state = state,
+        onAction = viewModel::handleUiAction,
+        modifier = modifier,
+    )
 }
