@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,6 +47,9 @@ fun PlatformDetailsContent(
                     details = state.platformDetail,
                     onGameClick = { gameId ->
                         onAction(PlatformDetailsUiAction.OnGameClick(gameId))
+                    },
+                    onSearchGameAction = {
+                        onAction(PlatformDetailsUiAction.OpenSearchSheet)
                     }
                 )
             }
@@ -66,8 +70,9 @@ fun PlatformDetailsContent(
 @Composable
 fun PlatformDetailsSuccessContent(
     details: GamePlatformDetail,
-    onGameClick: (Int) -> Unit = {},
     modifier: Modifier = Modifier,
+    onGameClick: (Int) -> Unit = {},
+    onSearchGameAction: (() -> Unit)? = null
 ) {
     val scrollState = rememberScrollState()
 
@@ -104,6 +109,17 @@ fun PlatformDetailsSuccessContent(
                 items(details.topGames) {
                     GameDexInfoListItem(name = it.name, onItemClick = { onGameClick(it.id) })
                 }
+            }
+        }
+
+        onSearchGameAction?.let {
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                onClick = { onSearchGameAction() }
+            ) {
+                Text(text = stringResource(R.string.search_game))
             }
         }
     }
