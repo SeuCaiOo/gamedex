@@ -17,8 +17,8 @@ android {
         applicationId = "br.com.seucaio.gamedex"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0.0-alpha.1"
+        versionCode = 2
+        versionName = "1.1.0-alpha"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
