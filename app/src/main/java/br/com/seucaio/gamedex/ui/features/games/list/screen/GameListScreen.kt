@@ -1,36 +1,38 @@
 package br.com.seucaio.gamedex.ui.features.games.list.screen
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.unit.dp
-import br.com.seucaio.gamedex.ui.theme.GameDexTheme
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import br.com.seucaio.gamedex.ui.features.games.list.viewmodel.GameListUiEvent
+import br.com.seucaio.gamedex.ui.features.games.list.viewmodel.GameListViewModel
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun GameListScreen(
+    platformId: Int,
+    gameQuery: String,
     onNavigateToDetail: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: GameListViewModel = koinViewModel { parametersOf(platformId, gameQuery) }
 ) {
-    Surface {
-        LazyColumn(
-            modifier = modifier,
-            verticalArrangement = Arrangement.spacedBy(15.dp),
-            contentPadding = PaddingValues(16.dp)
-        ) {
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is GameListUiEvent.NavigateToDetail -> {
+                    onNavigateToDetail(event.platformId)
+                }
+            }
         }
     }
-}
 
-@PreviewLightDark
-@Composable
-private fun GameScreenPreview() {
-    GameDexTheme {
-        GameListScreen(
-            onNavigateToDetail = {}
-        )
-    }
+    GameListContent(
+        state = state,
+        onAction = viewModel::handleUiAction,
+        modifier = modifier
+    )
 }

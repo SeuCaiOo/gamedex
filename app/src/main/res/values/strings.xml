@@ -17,4 +17,12 @@
     <string name="name">Name</string>
     <string name="search">Search</string>
     <string name="searching_by">Searching by: %1$s</string>
+    <string name="metacritic">METACRITIC</string>
+    <string name="user_score">USER SCORE</string>
+    <string name="release_date">Release Date</string>
+    <string name="developer">Developer</string>
+    <string name="publisher">Publisher</string>
+    <string name="genre">Genre</string>
+    <string name="no_games_found">No games found</string>
+    <string name="ratings">Ratings</string>
 </resources>

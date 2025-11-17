@@ -205,6 +205,10 @@ data class GameDetail(
                     )
                 ),
                 esrbRatingInfo = GameEsrbRatingDetail(id = 4, name = "Mature")
+            ),
+            GameDetail(
+                id = 417,
+                name = "Grand Theft Auto: Vice City",
             )
         )
     }
