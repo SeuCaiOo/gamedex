@@ -13,4 +13,8 @@
     <string name="no_platforms_found">No platforms found</string>
     <string name="top_games">Top Games</string>
     <string name="no_top_games_found">No top games found</string>
+    <string name="search_game">Search Game</string>
+    <string name="name">Name</string>
+    <string name="search">Search</string>
+    <string name="searching_by">Searching by: %1$s</string>
 </resources>
