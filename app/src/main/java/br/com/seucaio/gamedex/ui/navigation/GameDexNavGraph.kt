@@ -19,7 +19,7 @@ fun GameDexNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = GameDexRoute.Home,
+        startDestination = GameDexRoute.PlatformList,
         modifier = modifier
     ) {
         composable<GameDexRoute.Home> {
