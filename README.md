@@ -14,9 +14,10 @@ GameDex é um aplicativo Android nativo, construído com as tecnologias mais mod
 
 *(Espaço reservado para adicionar capturas de tela e gifs do aplicativo)*
 
-| Tela de Listagem | Tela de Detalhes |
-| :--------------: | :--------------: |
-| *(imagem)*      | *(imagem)*      |
+| Plataformas | Detalhes da Plataforma | Erro |
+| :--------------: | :--------------: | :--------------: |
+| ![Lista](https://github.com/user-attachments/assets/53bc3d7b-e8fc-4913-88eb-2ee4d8e2e9f6) | ![Detalhes1](https://github.com/user-attachments/assets/03e5880b-7477-4f51-8cc1-9a7e4e1a47b2) | ![Erro](https://github.com/user-attachments/assets/328cdf0a-4b7b-4852-b892-d7afcc45b4f3) | 
+|  | ![Detalhes2](https://github.com/user-attachments/assets/91cee71d-f4f7-4764-a1d7-470273adad65) |  |
 
 
 <details>
@@ -123,17 +124,3 @@ Este projeto requer uma chave de API da [RAWG.io](https://rawg.io/login) para ac
 Após configurar a chave, sincronize o projeto com o Gradle para que a chave seja injetada no `BuildConfig`.
 
 </details>
-
-## 🤝 Como Contribuir
-
-Contribuições são bem-vindas! Se você tem alguma sugestão ou quer reportar um bug, por favor, abra uma issue.
-
-1.  Faça um Fork do projeto.
-2.  Crie uma nova branch (`git checkout -b feature/sua-feature`).
-3.  Faça o commit de suas alterações (`git commit -m 'feat: Adiciona sua-feature'`).
-4.  Faça o Push para a branch (`git push origin feature/sua-feature`).
-5.  Abra um Pull Request.
-
-## 📄 Licença
-
-Este projeto está licenciado sob a Licença MIT.
