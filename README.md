@@ -60,47 +60,73 @@ O projeto segue a **Clean Architecture**, dividida em três módulos principais 
 -   **Rede:** [Retrofit](https://square.github.io/retrofit/) e [OkHttp](https://square.github.io/okhttp/).
 -   **Parsing JSON:** [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization).
 -   **Persistência Local:** [Room](https://developer.android.com/jetpack/androidx/releases/room).
+-   **Carregamento de Imagens:** [Coil](https://coil-kt.github.io/coil/).
 -   **Testes:**
     -   [JUnit4](https://junit.org/junit4/)
     -   [MockK](https://mockk.io/) para mocking.
     -   [Turbine](https://github.com/cashapp/turbine) para testar Flows.
+-   **Qualidade de Código:**
+    -   [Detekt](https://detekt.dev/) para análise estática.
+    -   [Kover](https://kotlinlang.org/docs/kover-overview.html) para cobertura de código.
 
 </details>
 
 <details>
 <summary><h2>🗺️ Roadmap</h2></summary>
 
-Esta é a primeira versão alfa do GameDex. O que já foi feito e o que vem por aí:
+O roadmap do projeto é dividido por versões, detalhando as principais entregas em cada uma.
+
+### ✅ Versão 1.1.0-alpha
+Esta versão focou na implementação da principal feature do aplicativo, a exploração de jogos, e na adição de um robusto ferramental de qualidade de código.
+
+*   [x] **Feature Completa de Jogos:**
+    *   [x] **Camada de Domínio (`:domain`):**
+        *   [x] Criação de novos modelos de domínio (`Game`, `GameDetails`).
+        *   [x] Desenvolvimento de `UseCases` para buscar a lista de jogos e os detalhes de um jogo.
+        *   [x] Definição da interface `GamesRepository`.
+    *   [x] **Camada de Dados (`:data`):**
+        *   [x] Implementação do `GamesRepositoryImpl`.
+        *   [x] Criação de `GamesRemoteDataSource` para comunicação com a API.
+        *   [x] Definição de novos DTOs para parsing das respostas da API de jogos.
+        *   [x] Criação de `Mappers` para converter DTOs em modelos de domínio.
+    *   [x] **Camada de Apresentação (`:app`):**
+        *   [x] Desenvolvimento da tela de listagem de jogos (`GameListScreen`).
+        *   [x] Desenvolvimento da tela de detalhes de jogos (`GameDetailsScreen`).
+        *   [x] Criação dos `ViewModels` e componentes MVI (`UiState`, `UiAction`, `UiEvent`) para ambas as telas.
+        *   [x] Implementação da navegação entre a tela de plataformas e as novas telas de jogos.
+        *   [x] Adição de novos componentes de UI reutilizáveis para a tela de detalhes.
+        *   [x] Implementação da funcionalidade de busca de jogos com um `SearchBottomSheetContent`.
+
+*   [x] **Melhorias de Infraestrutura e Qualidade:**
+    *   [x] **Análise Estática:** Integração completa do **Detekt** para garantir a qualidade e o padrão do código.
+    *   [x] **Cobertura de Testes:** Integração do **Kover** para gerar relatórios de cobertura de testes agregados.
+    *   [x] **Carregamento de Imagens:** Adição e configuração da biblioteca **Coil**.
+
+*   [x] **Testes:**
+    *   [x] Criação de testes unitários para os novos `UseCases` e `RemoteDataSource` da feature de jogos.
 
 ### ✅ Versão 1.0.0-alpha
-*   [x] Estrutura do projeto com Clean Architecture.
-*   [x] Módulos `:app`, `:data`, e `:domain`.
-*   [x] Integração com a API da RAWG.io.
-*   [x] Injeção de dependência configurada com Koin.
+*   [x] **Estrutura do Projeto:**
+    *   [x] Fundação com Clean Architecture e 3 módulos (`:app`, `:data`, `:domain`).
+    *   [x] Configuração de injeção de dependência com Koin.
 *   [x] **Feature de Plataformas:**
     *   [x] Listagem de todas as plataformas de jogos.
     *   [x] Tela de detalhes para cada plataforma.
-*   [x] **Cache com Room:** Implementação de cache para a feature de Plataformas, permitindo uso offline básico.
-*   [x] Testes unitários para a camada de domínio e dados.
+*   [x] **Cache com Room:** Implementação de cache para a feature de Plataformas.
+*   [x] **Testes Unitários:** Base de testes para as camadas de domínio e dados.
 
 ### ⏳ Próximos Passos
 *   [ ] **Qualidade de Código:**
-    *   [ ] Integrar **Detekt** para análise estática.
-    *   [ ] Integrar **JaCoCo** para relatórios de cobertura de testes.
     *   [ ] Adicionar **LeakCanary** para detecção de vazamentos de memória.
+*   [ ] **Performance e Funcionalidades:**
+    *   [ ] **Paginação na Lista:** Implementar paginação nas listas (ex: jogos, gêneros) usando a biblioteca Paging 3 do Jetpack.
+    *   [ ] **Cache de Dados com Room:** Expandir a implementação de cache com Room para as novas features (Gêneros, Lojas, etc.).
 *   [ ] **Feature de Gêneros:**
-    -   [ ] Listagem de todos os gêneros de jogos.
-    -   [ ] Tela de detalhes para cada gênero.
+    *   [ ] Listagem de todos os gêneros de jogos.
+    *   [ ] Tela de detalhes para cada gênero.
 *   [ ] **Feature de Lojas:**
-    -   [ ] Listagem de todas as lojas.
-    -   [ ] Tela de detalhes para cada loja.
-*   [ ] **Feature de Jogos:**
-    -   [ ] Listagem de jogos por plataforma/gênero/loja.
-    -   [ ] Tela de detalhes do jogo.
-*   [ ] **Busca:**
-    -   [ ] Implementar funcionalidade de busca por jogos, plataformas, etc.
-*   [ ] **Generalizar Cache/Offline:**
-    *   [ ] Expandir a implementação de cache com Room para as novas features (Gêneros, Lojas, etc.).
+    *   [ ] Listagem de todas as lojas.
+    *   [ ] Tela de detalhes para cada loja.
 *   [ ] **Testes de UI:**
     *   [ ] Adicionar testes de UI com Jetpack Compose.
 *   [ ] **CI/CD:**
