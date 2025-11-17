@@ -33,6 +33,10 @@ class PlatformDetailsViewModel(
             is PlatformDetailsUiAction.RetryLoadPlatform -> getGamePlatformById()
             is PlatformDetailsUiAction.OnBackClick -> navigateBack()
             is PlatformDetailsUiAction.OnGameClick -> navigateToGameDetails(action.gameId)
+            is PlatformDetailsUiAction.OpenSearchSheet -> showSearchSheet()
+            is PlatformDetailsUiAction.DismissSearchSheet -> showSearchSheet(false)
+            is PlatformDetailsUiAction.OnSearchQueryChange -> onQueryChange(action.query)
+            is PlatformDetailsUiAction.OnSearchClick -> onSearchClick()
         }
     }
 
@@ -56,5 +60,28 @@ class PlatformDetailsViewModel(
             _uiEvent.emit(PlatformDetailsUiEvent.NavigateToGameDetails(gameId))
         }
     }
+
+    private fun showSearchSheet(isVisible: Boolean = true) {
+        _uiState.update { it.setSearchSheetVisibility(isVisible) }
+    }
+
+    private fun onQueryChange(query: String) {
+        _uiState.update { it.updateSearchQuery(query) }
+    }
+
+    private fun onSearchClick() {
+        val currentQuery = _uiState.value.searchQuery
+        if (currentQuery.isNotBlank()) {
+            showSearchSheet(false)
+            navigateToGamestBySearch(currentQuery)
+        }
+    }
+
+    private fun navigateToGamestBySearch(query: String) {
+        viewModelScope.launch {
+            _uiEvent.emit(PlatformDetailsUiEvent.NavigateToGamesBySearch(query))
+        }
+    }
+
 }
 

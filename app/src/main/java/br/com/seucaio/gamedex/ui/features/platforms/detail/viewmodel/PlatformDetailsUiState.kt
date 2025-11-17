@@ -6,6 +6,8 @@ data class PlatformDetailsUiState(
     val isLoading: Boolean = false,
     val errorMessage: String? = null,
     val platformDetail: GamePlatformDetail? = null,
+    val isSearchSheetVisible: Boolean = false,
+    val searchQuery: String = ""
 ) {
     fun setLoading() = copy(isLoading = true, errorMessage = null)
 
@@ -13,4 +15,9 @@ data class PlatformDetailsUiState(
 
     fun setSuccess(data: GamePlatformDetail) =
         copy(isLoading = false, platformDetail = data, errorMessage = null)
+
+    fun setSearchSheetVisibility(isVisible: Boolean) = copy(isSearchSheetVisible = isVisible)
+
+    fun updateSearchQuery(query: String) = copy(searchQuery = query)
+
 }

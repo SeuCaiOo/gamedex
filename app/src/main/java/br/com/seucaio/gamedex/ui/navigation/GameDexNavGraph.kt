@@ -49,6 +49,9 @@ fun GameDexNavGraph(
                 onNavigateBack = { navController.popBackStack() },
                 onNavigateToGameDetails = { gameId ->
                     navController.navigate(GameDexRoute.GameDetails(gameId))
+                },
+                onNavigateToGameListBySearch = { gameQuery ->
+                    navController.navigate(GameDexRoute.GameList(platformId, gameQuery))
                 }
             )
         }
