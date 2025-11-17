@@ -12,12 +12,18 @@ GameDex é um aplicativo Android nativo, construído com as tecnologias mais mod
 
 ## 🖼️ Screenshots & Gifs
 
-*(Espaço reservado para adicionar capturas de tela e gifs do aplicativo)*
 
-| Plataformas | Detalhes da Plataforma | Erro |
+| Plataformas | Detalhes da Plataforma | Pesquisa |
 | :--------------: | :--------------: | :--------------: |
-| ![Lista](https://github.com/user-attachments/assets/53bc3d7b-e8fc-4913-88eb-2ee4d8e2e9f6) | ![Detalhes1](https://github.com/user-attachments/assets/03e5880b-7477-4f51-8cc1-9a7e4e1a47b2) | ![Erro](https://github.com/user-attachments/assets/328cdf0a-4b7b-4852-b892-d7afcc45b4f3) | 
-|  | ![Detalhes2](https://github.com/user-attachments/assets/91cee71d-f4f7-4764-a1d7-470273adad65) |  |
+| ![Lista](https://github.com/user-attachments/assets/53bc3d7b-e8fc-4913-88eb-2ee4d8e2e9f6) | ![Detalhes1](https://github.com/user-attachments/assets/03e5880b-7477-4f51-8cc1-9a7e4e1a47b2) | ![Pesquisa](https://github.com/user-attachments/assets/7a6c44f6-3363-4c15-bfe5-ca59a69f4343) | 
+|  | ![Detalhes2](https://github.com/user-attachments/assets/5e152eb8-89c4-4975-ab86-2cf070a7b7e3) |  |
+
+
+
+| Jogos | Detalhes do Jogo | Erro |
+| :--------------: | :--------------: | :--------------: |
+| ![Lista](https://github.com/user-attachments/assets/404b131b-ce39-44e7-8880-63b34bb261b5) | ![Detalhes1](https://github.com/user-attachments/assets/77fae813-ccab-45f9-894c-2144c67b3e94) | ![Erro](https://github.com/user-attachments/assets/64816c34-d5df-4829-9c62-9032803ef5e1) | 
+|  | ![Detalhes2](https://github.com/user-attachments/assets/ae7d6a47-bf23-4e14-bb69-d3b9cd7b3c99) | ![Erro](https://github.com/user-attachments/assets/a380757c-3f38-4f71-b3f8-9e2d51283d94) |
 
 
 <details>
