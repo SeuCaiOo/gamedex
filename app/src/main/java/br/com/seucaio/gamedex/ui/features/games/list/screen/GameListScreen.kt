@@ -3,6 +3,7 @@ package br.com.seucaio.gamedex.ui.features.games.list.screen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.seucaio.gamedex.ui.features.games.list.viewmodel.GameListUiEvent
@@ -19,12 +20,13 @@ fun GameListScreen(
     viewModel: GameListViewModel = koinViewModel { parametersOf(platformId, gameQuery) }
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val latestOnNavigateToDetail by rememberUpdatedState(onNavigateToDetail)
 
     LaunchedEffect(Unit) {
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is GameListUiEvent.NavigateToDetail -> {
-                    onNavigateToDetail(event.platformId)
+                    latestOnNavigateToDetail(event.platformId)
                 }
             }
         }

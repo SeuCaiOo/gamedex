@@ -56,5 +56,4 @@ class GameListViewModel(
     private fun navigateToDetail(platformId: Int) {
         viewModelScope.launch { _uiEvent.emit(GameListUiEvent.NavigateToDetail(platformId)) }
     }
-
 }

@@ -42,7 +42,7 @@ fun GameDexGridItem(
         val hasNoImage: Boolean = backgroundImageUrl.isNullOrBlank()
 
         Column(modifier = Modifier.fillMaxSize()) {
-            Box{
+            Box {
                 if (!hasNoImage) {
                     AsyncImage(
                         model = backgroundImageUrl,
@@ -51,7 +51,6 @@ fun GameDexGridItem(
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.padding(bottom = 24.dp).fillMaxSize()
                     )
-
                 }
                 Column(
                     modifier = Modifier.padding(horizontal = 4.dp).fillMaxSize(),
@@ -70,7 +69,6 @@ fun GameDexGridItem(
                     )
                 }
             }
-
         }
     }
 }

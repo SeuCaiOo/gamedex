@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
@@ -19,7 +18,6 @@ import br.com.seucaio.gamedex.R
 import br.com.seucaio.gamedex.model.game.GameItem
 import br.com.seucaio.gamedex.ui.components.GameDexErrorContent
 import br.com.seucaio.gamedex.ui.components.GameDexGridItem
-import br.com.seucaio.gamedex.ui.components.GameDexListItem
 import br.com.seucaio.gamedex.ui.components.GameDexLoadingContent
 import br.com.seucaio.gamedex.ui.components.GameDexTitleText
 import br.com.seucaio.gamedex.ui.features.games.list.viewmodel.GameListUiAction
@@ -28,16 +26,16 @@ import br.com.seucaio.gamedex.ui.theme.GameDexTheme
 
 @Composable
 fun GameListContent(
-    modifier: Modifier = Modifier,
     state: GameListUiState,
-    onAction: (GameListUiAction) -> Unit
+    onAction: (GameListUiAction) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Surface(modifier = modifier) {
         when {
             state.gameItems != null -> {
                 GameListSuccessContent(
                     gameList = state.gameItems,
-                    modifier = modifier,
+                    modifier = Modifier,
                     onItemClick = { platform ->
                         onAction(GameListUiAction.OnGameClick(platform.id))
                     }
@@ -46,17 +44,16 @@ fun GameListContent(
 
             !state.errorMessage.isNullOrBlank() -> {
                 GameDexErrorContent(
-                    modifier = modifier,
+                    modifier = Modifier,
                     onRetry = { onAction(GameListUiAction.RetryLoadGames) },
                     message = state.errorMessage
                 )
             }
 
-            state.isLoading -> GameDexLoadingContent(modifier = modifier)
+            state.isLoading -> GameDexLoadingContent(modifier = Modifier)
         }
     }
 }
-
 
 @Composable
 fun GameListSuccessContent(
@@ -91,8 +88,6 @@ fun GameListSuccessContent(
         }
     }
 }
-
-
 
 @PreviewLightDark
 @Composable

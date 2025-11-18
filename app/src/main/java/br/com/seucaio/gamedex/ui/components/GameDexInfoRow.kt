@@ -16,10 +16,14 @@ import androidx.compose.ui.unit.sp
 import br.com.seucaio.gamedex.ui.theme.GameDexTheme
 
 @Composable
-fun GameDexInfoRow(label: String, value: String?) {
+fun GameDexInfoRow(
+    label: String,
+    value: String?,
+    modifier: Modifier = Modifier
+) {
     if (value.isNullOrBlank()) return
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp),
         horizontalArrangement = Arrangement.SpaceBetween

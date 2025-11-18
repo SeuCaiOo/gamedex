@@ -14,10 +14,11 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -49,7 +50,7 @@ class PlatformDetailsViewModelTest {
         Dispatchers.resetMain()
     }
 
-    private fun initViewModel () {
+    private fun initViewModel() {
         viewModel = PlatformDetailsViewModel(
             id = testPlatformId,
             getPlatformByIdUseCase = getPlatformByIdUseCase,
@@ -167,7 +168,6 @@ class PlatformDetailsViewModelTest {
             cancelAndIgnoreRemainingEvents()
         }
     }
-
 
     // endregion
 }

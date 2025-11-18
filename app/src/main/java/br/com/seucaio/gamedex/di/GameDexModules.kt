@@ -32,14 +32,14 @@ val appModule = module {
 
     // region Games
 
-    viewModel {(platformId: Int, gameQuery: String) ->
+    viewModel { (platformId: Int, gameQuery: String) ->
         GameListViewModel(
             platformId = platformId,
             gameQuery = gameQuery,
             getGamesByPlatformByIdUseCase = get<GetGamesByPlatformByIdUseCase>(),
         )
     }
-    viewModel {( gameId: Int) ->
+    viewModel { (gameId: Int) ->
         GameDetailsViewModel(
             id = gameId,
             getGameDetailByIdUseCase = get<GetGameDetailByIdUseCase>(),
