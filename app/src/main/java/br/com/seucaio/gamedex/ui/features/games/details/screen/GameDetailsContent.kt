@@ -1,19 +1,14 @@
 package br.com.seucaio.gamedex.ui.features.games.details.screen
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -22,22 +17,20 @@ import br.com.seucaio.gamedex.R
 import br.com.seucaio.gamedex.model.game.GameDetail
 import br.com.seucaio.gamedex.ui.components.GameDexDescriptionInfo
 import br.com.seucaio.gamedex.ui.components.GameDexErrorContent
-import br.com.seucaio.gamedex.ui.components.GameDexGameCountInfo
 import br.com.seucaio.gamedex.ui.components.GameDexHeader
 import br.com.seucaio.gamedex.ui.components.GameDexInfoRow
 import br.com.seucaio.gamedex.ui.components.GameDexLoadingContent
-import br.com.seucaio.gamedex.ui.components.GameDexRatingCard
+import br.com.seucaio.gamedex.ui.components.GameDexRatingInfo
 import br.com.seucaio.gamedex.ui.components.GameDexTagInfo
-import br.com.seucaio.gamedex.ui.components.GameDexTitleText
 import br.com.seucaio.gamedex.ui.features.games.details.viewmodel.GameDetailsUiAction
 import br.com.seucaio.gamedex.ui.features.games.details.viewmodel.GameDetailsUiState
 import br.com.seucaio.gamedex.ui.theme.GameDexTheme
 
 @Composable
 fun GameDetailsContent(
-    modifier: Modifier = Modifier,
     state: GameDetailsUiState,
-    onAction: (GameDetailsUiAction) -> Unit
+    onAction: (GameDetailsUiAction) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Surface(modifier = modifier) {
         when {
@@ -47,7 +40,7 @@ fun GameDetailsContent(
 
             !state.errorMessage.isNullOrBlank() -> {
                 GameDexErrorContent(
-                    modifier = modifier,
+                    modifier = Modifier,
                     onRetry = { onAction(GameDetailsUiAction.RetryLoadGame) },
                     message = state.errorMessage
                 )
@@ -106,31 +99,13 @@ fun GameDetailsSuccessContent(
                 modifier = Modifier.padding(vertical = 16.dp)
             )
 
-            Column(
-                modifier = Modifier.padding(vertical = 16.dp)
-            ) {
-                GameDexTitleText(
-                    modifier = Modifier.fillMaxWidth(),
-                    title = stringResource(R.string.ratings),
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    GameDexRatingCard(
-                        label = stringResource(R.string.metacritic),
-                        score = details.metacritic.toString(),
-                        modifier = Modifier.weight(1f)
-                    )
-                    GameDexRatingCard(
-                        label = stringResource(R.string.user_score),
-                        score = details.rating.toString(),
-                        modifier = Modifier.weight(1f),
-                    )
-                }
-            }
+            GameDexRatingInfo(
+                infos = listOf(
+                    stringResource(R.string.metacritic) to details.metacritic.toString(),
+                    stringResource(R.string.user_score) to details.rating.toString()
+                ),
+                modifier = Modifier.padding(vertical = 16.dp),
+            )
         }
     }
 }
@@ -148,14 +123,13 @@ private fun GameDetailsContentSuccessPreview() {
     }
 }
 
-
 @PreviewLightDark
 @Composable
 private fun GameDetailsContentSuccessWithoutTopGamesAndDescriptionPreview() {
     GameDexTheme {
         GameDetailsContent(
             state = GameDetailsUiState(
-                gameDetail = GameDetail.sampleList.last()
+                gameDetail = GameDetail.sampleList.lastOrNull()
             ),
             onAction = {}
         )
