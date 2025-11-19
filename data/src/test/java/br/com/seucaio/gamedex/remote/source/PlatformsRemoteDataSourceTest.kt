@@ -89,7 +89,6 @@ class PlatformsRemoteDataSourceTest {
         coVerify(exactly = 1) { connectivityChecker.isNetworkAvailable }
     }
 
-
     // endregion
 
     // region getById()

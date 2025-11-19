@@ -81,7 +81,6 @@ class GamesRemoteDataSourceTest {
         coEvery { apiService.searchGamesByPlatform("test", 1) } throws apiException
         every { connectivityChecker.isNetworkAvailable } returns false
 
-
         // When / Then
         assertFailsWith<DomainException.NetworkUnavailableException> {
             dataSource.searchByPlatform("test", 1)
