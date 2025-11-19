@@ -10,6 +10,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import java.util.concurrent.TimeUnit
 
+private const val TIMEOUT_SECONDS: Long = 30L
+
 object RetrofitConfig {
     private const val JSON_MEDIA_TYPE = "application/json"
 
@@ -27,8 +29,8 @@ object RetrofitConfig {
     fun okHttpClient(interceptors: List<Interceptor>): OkHttpClient {
         return OkHttpClient.Builder()
             .apply { interceptors.forEach { addInterceptor(it) } }
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .build()
     }
 

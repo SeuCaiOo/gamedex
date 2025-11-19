@@ -1,9 +1,9 @@
 package br.com.seucaio.gamedex.mapper
 
-import br.com.seucaio.gamedex.model.data.GameDataInfo
+import br.com.seucaio.gamedex.mapper.GameDataMapper.toEsrbDomain
+import br.com.seucaio.gamedex.mapper.GameDataMapper.toInfoDomain
 import br.com.seucaio.gamedex.model.game.GameDetail
 import br.com.seucaio.gamedex.model.game.GameDeveloperDetail
-import br.com.seucaio.gamedex.model.game.GameEsrbRatingDetail
 import br.com.seucaio.gamedex.model.game.GameItem
 import br.com.seucaio.gamedex.model.game.GamePlatformDetailInfo
 import br.com.seucaio.gamedex.model.game.GamePublisherDetail
@@ -14,10 +14,10 @@ import br.com.seucaio.gamedex.model.platform.GamePlatform
 import br.com.seucaio.gamedex.remote.dto.game.GameDetailResponse
 import br.com.seucaio.gamedex.remote.dto.game.GameItemResponse
 import br.com.seucaio.gamedex.remote.dto.game.GameScreenshotResponse
-import br.com.seucaio.gamedex.remote.dto.list.GameDataListInfoGamesResponse
+import br.com.seucaio.gamedex.remote.dto.game.PlatformInfoDetailResponse
+import br.com.seucaio.gamedex.remote.dto.game.StoreInfoDetailResponse
 import br.com.seucaio.gamedex.remote.dto.list.GameDataListInfoResponse
 import br.com.seucaio.gamedex.util.extension.EMPTY
-import br.com.seucaio.gamedex.util.extension.ZERO
 import br.com.seucaio.gamedex.util.extension.orZero
 
 object GamesMapper {
@@ -69,14 +69,6 @@ object GamesMapper {
         return GameScreenshot(id = id, image = image)
     }
 
-    private fun GameDataListInfoGamesResponse.toInfoDomain(): GameDataInfo {
-        return GameDataInfo(id = id, name = name)
-    }
-
-    private fun GameDataListInfoGamesResponse.toEsrbDomain(): GameEsrbRatingDetail {
-        return GameEsrbRatingDetail(id = id, name = name)
-    }
-
     private fun GameDataListInfoResponse.toPlatformDomain(): GamePlatform {
         return GamePlatform(
             id = id,
@@ -113,30 +105,28 @@ object GamesMapper {
         )
     }
 
-    private fun GameDetailResponse.PlatformInfoDetailResponse<GameDataListInfoResponse>.toDomain(): GamePlatformDetailInfo {
-        val req = requirements
+    private fun PlatformInfoDetailResponse<GameDataListInfoResponse>.toDomain(): GamePlatformDetailInfo {
         return GamePlatformDetailInfo(
             platformItem = info.toPlatformDomain(),
             releasedAt = releasedAt.orEmpty(),
-            requirements = if (req != null) {
+            requirements = requirements?.let {
                 GamePlatformDetailInfo.PlatformRequirements(
-                    minimum = req.minimum.orEmpty(),
-                    recommended = req.recommended.orEmpty()
+                    minimum = it.minimum.orEmpty(),
+                    recommended = it.recommended.orEmpty()
                 )
-            } else null
+            }
         )
     }
 
-    private fun GameDetailResponse.StoreInfoDetailResponse.toDomain(): GameStoreDetailInfo {
-        val s = info
+    private fun StoreInfoDetailResponse.toDomain(): GameStoreDetailInfo {
         return GameStoreDetailInfo(
             id = id,
             storeItem = GameStoreDetailInfo.StoreItem(
-                id = s.id,
-                name = s.name,
-                domain = s.domain,
-                gamesCount = s.gamesCount.orZero(),
-                imageBackground = s.imageBackground.orEmpty()
+                id = info.id,
+                name = info.name,
+                domain = info.domain,
+                gamesCount = info.gamesCount.orZero(),
+                imageBackground = info.imageBackground.orEmpty()
             )
         )
     }

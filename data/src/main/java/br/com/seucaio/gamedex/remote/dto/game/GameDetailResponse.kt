@@ -27,35 +27,35 @@ data class GameDetailResponse(
     val genres: List<GameDataListInfoResponse>? = null,
     @SerialName("esrb_rating")
     val esrbRating: GameDataListInfoGamesResponse? = null,
+)
+
+@Serializable
+data class PlatformInfoDetailResponse<T>(
+    @SerialName("platform") val info: T,
+    @SerialName("released_at")
+    val releasedAt: String? = null,
+    val requirements: PlatformRequirementsResponse? = null
 ) {
     @Serializable
-    data class PlatformInfoDetailResponse<T>(
-        @SerialName("platform") val info: T,
-        @SerialName("released_at")
-        val releasedAt: String? = null,
-        val requirements: PlatformRequirementsResponse? = null
-    ) {
-        @Serializable
-        data class PlatformRequirementsResponse(
-            val minimum: String? = null,
-            val recommended: String? = null
-        )
-    }
+    data class PlatformRequirementsResponse(
+        val minimum: String? = null,
+        val recommended: String? = null
+    )
+}
 
+@Serializable
+data class StoreInfoDetailResponse(
+    val id: Int,
+    @SerialName("store") val info: StoreItemResponse
+) {
     @Serializable
-    data class StoreInfoDetailResponse(
+    data class StoreItemResponse(
         val id: Int,
-        @SerialName("store") val info: StoreItemResponse
-    ) {
-        @Serializable
-        data class StoreItemResponse(
-            val id: Int,
-            val name: String,
-            val domain: String? = null,
-            @SerialName("games_count")
-            val gamesCount: Int? = null,
-            @SerialName("image_background")
-            val imageBackground: String? = null,
-        )
-    }
+        val name: String,
+        val domain: String? = null,
+        @SerialName("games_count")
+        val gamesCount: Int? = null,
+        @SerialName("image_background")
+        val imageBackground: String? = null,
+    )
 }

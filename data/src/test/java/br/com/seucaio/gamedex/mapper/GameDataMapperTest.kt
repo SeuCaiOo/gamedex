@@ -1,13 +1,13 @@
 package br.com.seucaio.gamedex.mapper
 
-import br.com.seucaio.gamedex.model.data.TopGameData
-import br.com.seucaio.gamedex.remote.dto.GameDataInfoResponse
-import br.com.seucaio.gamedex.remote.dto.list.GameDataListInfoGamesResponse
-import br.com.seucaio.gamedex.remote.dto.list.GameDataListInfoResponse
 import br.com.seucaio.gamedex.mapper.GameDataMapper.toPlatformDetailDomain
 import br.com.seucaio.gamedex.mapper.GameDataMapper.toPlatformDomain
 import br.com.seucaio.gamedex.mapper.GameDataMapper.toTopGameDomain
 import br.com.seucaio.gamedex.mapper.GameDataMapper.toTopGameEntity
+import br.com.seucaio.gamedex.model.data.TopGameData
+import br.com.seucaio.gamedex.remote.dto.GameDataInfoResponse
+import br.com.seucaio.gamedex.remote.dto.list.GameDataListInfoGamesResponse
+import br.com.seucaio.gamedex.remote.dto.list.GameDataListInfoResponse
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

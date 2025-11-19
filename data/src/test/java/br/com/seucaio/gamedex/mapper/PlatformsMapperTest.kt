@@ -15,7 +15,10 @@ class PlatformsMapperTest {
     fun `should map GamePlatformEntity to GamePlatform`() {
         // Given
         val entity = GamePlatformEntity(
-            platformId = 1, name = "Platform 1", gamesCount = 100, description = "desc"
+            platformId = 1,
+            name = "Platform 1",
+            gamesCount = 100,
+            description = "desc"
         )
 
         // When
@@ -90,7 +93,10 @@ class PlatformsMapperTest {
     fun `should map GamePlatformEntity to GamePlatformDetail`() {
         // Given
         val entity = GamePlatformEntity(
-            platformId = 1, name = "Platform 1", gamesCount = 100, description = "Description"
+            platformId = 1,
+            name = "Platform 1",
+            gamesCount = 100,
+            description = "Description"
         )
         val topGames = listOf(TopGameData(id = 10, name = "Top Game 1"))
 
@@ -111,7 +117,10 @@ class PlatformsMapperTest {
     fun `should map GamePlatformEntity to GamePlatformDetail with empty top games`() {
         // Given
         val entity = GamePlatformEntity(
-            platformId = 1, name = "Platform 1", gamesCount = 100, description = "Description"
+            platformId = 1,
+            name = "Platform 1",
+            gamesCount = 100,
+            description = "Description"
         )
 
         // When

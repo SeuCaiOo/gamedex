@@ -1,9 +1,9 @@
 package br.com.seucaio.gamedex.repository
 
+import br.com.seucaio.gamedex.mapper.GamesMapper.toDomain
 import br.com.seucaio.gamedex.model.game.GameDetail
 import br.com.seucaio.gamedex.model.game.GameItem
 import br.com.seucaio.gamedex.remote.source.GamesRemoteDatSource
-import br.com.seucaio.gamedex.mapper.GamesMapper.toDomain
 
 class GamesRepositoryImpl(
     private val remoteDataSource: GamesRemoteDatSource

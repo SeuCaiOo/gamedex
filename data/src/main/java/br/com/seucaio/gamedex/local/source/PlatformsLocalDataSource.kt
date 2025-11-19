@@ -1,8 +1,8 @@
 package br.com.seucaio.gamedex.local.source
 
-import br.com.seucaio.gamedex.local.database.entity.GamePlatformEntity
 import br.com.seucaio.gamedex.local.database.dao.PlatformsDao
 import br.com.seucaio.gamedex.local.database.dao.TopGamesDao
+import br.com.seucaio.gamedex.local.database.entity.GamePlatformEntity
 import br.com.seucaio.gamedex.local.database.entity.TopGameEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

@@ -1,7 +1,9 @@
 package br.com.seucaio.gamedex.mapper
 
 import br.com.seucaio.gamedex.local.database.entity.TopGameEntity
+import br.com.seucaio.gamedex.model.data.GameDataInfo
 import br.com.seucaio.gamedex.model.data.TopGameData
+import br.com.seucaio.gamedex.model.game.GameEsrbRatingDetail
 import br.com.seucaio.gamedex.model.platform.GamePlatform
 import br.com.seucaio.gamedex.model.platform.GamePlatformDetail
 import br.com.seucaio.gamedex.remote.dto.GameDataInfoResponse
@@ -43,5 +45,13 @@ object GameDataMapper {
 
     fun GameDataListInfoGamesResponse.toTopGameEntity(platformId: Int): TopGameEntity {
         return TopGameEntity(gameId = id, name = name, platformId = platformId)
+    }
+
+    fun GameDataListInfoGamesResponse.toInfoDomain(): GameDataInfo {
+        return GameDataInfo(id = id, name = name)
+    }
+
+    fun GameDataListInfoGamesResponse.toEsrbDomain(): GameEsrbRatingDetail {
+        return GameEsrbRatingDetail(id = id, name = name)
     }
 }

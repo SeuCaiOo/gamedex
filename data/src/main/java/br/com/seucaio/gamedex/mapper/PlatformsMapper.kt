@@ -47,5 +47,4 @@ object PlatformsMapper {
     fun List<GamePlatformEntity>.toDetailDomain(): List<GamePlatformDetail> {
         return map { it.toDetailDomain() }
     }
-
 }
