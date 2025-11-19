@@ -11,8 +11,8 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -21,6 +21,8 @@ import kotlin.test.assertFailsWith
 
 @ExperimentalCoroutinesApi
 class PlatformsRemoteDataSourceTest {
+
+    private val testDispatcher = StandardTestDispatcher()
 
     @MockK
     private lateinit var apiService: GameDexApiService
@@ -36,7 +38,7 @@ class PlatformsRemoteDataSourceTest {
         dataSource = PlatformsRemoteDataSourceImpl(
             apiService = apiService,
             connectivityChecker = connectivityChecker,
-            ioDispatcher = Dispatchers.Unconfined
+            ioDispatcher = testDispatcher
         )
     }
 
