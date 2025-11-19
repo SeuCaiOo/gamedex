@@ -129,13 +129,22 @@ complexity:
   LongMethod:
     active: true
     threshold: 60
+    ignoreAnnotated: [ 'org.junit.Test' ]
   LongParameterList:
     active: true
     functionThreshold: 6
     constructorThreshold: 7
     ignoreDefaultParameters: false
     ignoreDataClasses: true
-    ignoreAnnotated: [ 'androidx.compose.runtime.Composable' ]
+    ignoreAnnotated:
+      - 'androidx.compose.runtime.Composable'
+      - 'retrofit2.http.GET'
+      - 'retrofit2.http.POST'
+      - 'retrofit2.http.PUT'
+      - 'retrofit2.http.DELETE'
+      - 'retrofit2.http.PATCH'
+      - 'retrofit2.http.HEAD'
+      - 'retrofit2.http.OPTIONS'
   MethodOverloading:
     active: false
     threshold: 6
@@ -638,6 +647,7 @@ style:
     excludeImportStatements: true
     excludeCommentStatements: false
     excludeRawStrings: true
+    ignoreAnnotated: [ 'org.junit.Test' ]
   MayBeConst:
     active: true
   ModifierOrder:
@@ -681,7 +691,7 @@ style:
       - 'equals'
     excludeLabeled: false
     excludeReturnFromLambda: true
-    excludeGuardClauses: false
+    excludeGuardClauses: true
   SafeCast:
     active: true
   SerialVersionUIDInSerializableClass:
@@ -889,6 +899,7 @@ formatting:
     active: true
     maxLineLength: 120
     ignoreBackTickedIdentifier: false
+    ignoreAnnotated: [ 'org.junit.Test' ]
   ModifierListSpacing:
     active: true
     autoCorrect: true
