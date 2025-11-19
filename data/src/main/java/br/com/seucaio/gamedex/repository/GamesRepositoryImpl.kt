@@ -12,20 +12,16 @@ class GamesRepositoryImpl(
         query: String,
         platformId: Int
     ): Result<List<GameItem>> {
-        return try {
+        return runCatching {
             val response = remoteDataSource.searchByPlatform(query, platformId)
-            Result.success(response.results.toDomain())
-        } catch (e: Exception) {
-            Result.failure(e)
+            response.results.toDomain()
         }
     }
 
     override suspend fun getById(id: Int): Result<GameDetail> {
-        return try {
+        return runCatching {
             val response = remoteDataSource.getById(id)
-            Result.success(response.toDomain())
-        } catch (e: Exception) {
-            Result.failure(e)
+            response.toDomain()
         }
     }
 }

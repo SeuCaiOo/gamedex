@@ -21,11 +21,7 @@ class PlatformsRepositoryImpl(
     private val localDataSource: PlatformsLocalDataSource
 ) : PlatformsRepository {
     override suspend fun getAll(): Result<List<GamePlatform>> {
-        return try {
-            Result.success(getSuccessListGamePlatform())
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+        return runCatching { getSuccessListGamePlatform() }
     }
 
     private suspend fun getSuccessListGamePlatform(): List<GamePlatform> {
@@ -50,11 +46,7 @@ class PlatformsRepositoryImpl(
     }
 
     override suspend fun getById(id: Int): Result<GamePlatformDetail> {
-        return try {
-            Result.success(getSuccessPlatformDetail(id))
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+        return runCatching { getSuccessPlatformDetail(id) }
     }
 
     private suspend fun getSuccessPlatformDetail(id: Int): GamePlatformDetail {
