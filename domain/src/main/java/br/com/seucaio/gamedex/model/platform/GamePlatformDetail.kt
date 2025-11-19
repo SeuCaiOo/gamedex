@@ -29,7 +29,8 @@ data class GamePlatformDetail(
                 hardware option available to gamers: original console, One S version 
                 (with a smaller body, no external power supply, and native HDR/4k support) 
                 and One X (pro-gamer-oriented system with updated hardware and 4k 
-                rendering in real time).""".trimIndent(),
+                rendering in real time).
+                """.trimIndent(),
                 gamesCount = 130,
                 topGames = TopGameData.sampleList
             ),

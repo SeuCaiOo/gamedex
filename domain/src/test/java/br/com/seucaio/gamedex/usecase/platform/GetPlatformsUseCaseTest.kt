@@ -4,7 +4,6 @@ import br.com.seucaio.gamedex.model.platform.GamePlatform
 import br.com.seucaio.gamedex.repository.PlatformsRepository
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue

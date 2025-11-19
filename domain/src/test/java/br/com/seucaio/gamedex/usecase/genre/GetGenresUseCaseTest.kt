@@ -48,5 +48,4 @@ class GetGenresUseCaseTest {
         assertEquals(failureResult, result)
         assertEquals(result.exceptionOrNull(), exception)
     }
-
 }

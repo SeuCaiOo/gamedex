@@ -22,7 +22,8 @@ data class GameGenreDetail(
                 perspective. It is noted that gamepads are generally more suited to control 
                 the vehicle than keyboard/mouse pair. Although car avatars may render 
                 real-life examples, there are many instances where spaceships, formless
-                mechanisms and other fantastical entities take the role of the avatar. """.trimIndent(),
+                mechanisms and other fantastical entities take the role of the avatar. 
+                """.trimIndent(),
                 gamesCount = 257626,
                 topGames = TopGameData.sampleList
             ),

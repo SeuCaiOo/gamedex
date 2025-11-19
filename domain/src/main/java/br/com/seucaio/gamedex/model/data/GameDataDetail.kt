@@ -5,4 +5,3 @@ interface GameDataDetail {
     val name: String
     val imageBackground: String?
 }
-
