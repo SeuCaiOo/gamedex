@@ -82,6 +82,18 @@ dependencies {
     detektPlugins(libs.bundles.detekt)
 }
 
+detekt {
+    config.setFrom(
+        files(
+            "$rootDir/config/detekt/detekt.yml",
+            "$rootDir/config/detekt/detekt-compose.yml"
+        )
+    )
+    toolVersion = libs.versions.detekt.get()
+    buildUponDefaultConfig = true
+    ignoreFailures = true
+}
+
 // Configure Kover to generate an aggregated report for all modules.
 kover {
     dependencies {

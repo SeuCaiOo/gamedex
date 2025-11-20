@@ -25,10 +25,10 @@ fun GameDexDescriptionInfo(
     modifier: Modifier = Modifier,
 ) {
     val text: String = description.ifBlank { stringResource(R.string.no_description) }
-    Column {
+    Column(modifier = modifier) {
         GameDexTitleText(
             title = "About",
-            modifier = modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(

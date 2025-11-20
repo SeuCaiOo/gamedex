@@ -27,9 +27,9 @@ import br.com.seucaio.gamedex.model.platform.GamePlatformDetail
 import br.com.seucaio.gamedex.ui.components.GameDexDescriptionInfo
 import br.com.seucaio.gamedex.ui.components.GameDexErrorContent
 import br.com.seucaio.gamedex.ui.components.GameDexGameCountInfo
+import br.com.seucaio.gamedex.ui.components.GameDexInfoListItem
 import br.com.seucaio.gamedex.ui.components.GameDexLoadingContent
 import br.com.seucaio.gamedex.ui.components.GameDexTitleText
-import br.com.seucaio.gamedex.ui.components.GameDexInfoListItem
 import br.com.seucaio.gamedex.ui.features.platforms.detail.viewmodel.PlatformDetailsUiAction
 import br.com.seucaio.gamedex.ui.features.platforms.detail.viewmodel.PlatformDetailsUiState
 import br.com.seucaio.gamedex.ui.theme.GameDexTheme
@@ -56,7 +56,7 @@ fun PlatformDetailsContent(
 
             !state.errorMessage.isNullOrBlank() -> {
                 GameDexErrorContent(
-                    modifier = modifier,
+                    modifier = Modifier,
                     onRetry = { onAction(PlatformDetailsUiAction.RetryLoadPlatform) },
                     message = state.errorMessage
                 )
@@ -137,7 +137,6 @@ private fun PlatformDetailsContentSuccessPreview() {
         )
     }
 }
-
 
 @PreviewLightDark
 @Composable

@@ -1,9 +1,9 @@
 package br.com.seucaio.gamedex.repository
 
+import br.com.seucaio.gamedex.mapper.GamesMapper.toDomain
 import br.com.seucaio.gamedex.model.game.GameDetail
 import br.com.seucaio.gamedex.model.game.GameItem
 import br.com.seucaio.gamedex.remote.source.GamesRemoteDatSource
-import br.com.seucaio.gamedex.mapper.GamesMapper.toDomain
 
 class GamesRepositoryImpl(
     private val remoteDataSource: GamesRemoteDatSource
@@ -12,20 +12,16 @@ class GamesRepositoryImpl(
         query: String,
         platformId: Int
     ): Result<List<GameItem>> {
-        return try {
+        return runCatching {
             val response = remoteDataSource.searchByPlatform(query, platformId)
-            Result.success(response.results.toDomain())
-        } catch (e: Exception) {
-            Result.failure(e)
+            response.results.toDomain()
         }
     }
 
     override suspend fun getById(id: Int): Result<GameDetail> {
-        return try {
+        return runCatching {
             val response = remoteDataSource.getById(id)
-            Result.success(response.toDomain())
-        } catch (e: Exception) {
-            Result.failure(e)
+            response.toDomain()
         }
     }
 }

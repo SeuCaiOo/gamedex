@@ -6,6 +6,8 @@ import br.com.seucaio.gamedex.model.game.GameItem
 import br.com.seucaio.gamedex.remote.dto.game.GameDetailResponse
 import br.com.seucaio.gamedex.remote.dto.game.GameItemResponse
 import br.com.seucaio.gamedex.remote.dto.game.GameScreenshotResponse
+import br.com.seucaio.gamedex.remote.dto.game.PlatformInfoDetailResponse
+import br.com.seucaio.gamedex.remote.dto.game.StoreInfoDetailResponse
 import br.com.seucaio.gamedex.remote.dto.list.GameDataListInfoGamesResponse
 import br.com.seucaio.gamedex.remote.dto.list.GameDataListInfoResponse
 import org.junit.Assert.assertEquals
@@ -135,19 +137,24 @@ class GamesMapperTest {
             rating = 4.8,
             alternativeNames = listOf("E1", "E2"),
             platforms = listOf(
-                GameDetailResponse.PlatformInfoDetailResponse(
-                    info = GameDataListInfoResponse(id = 1, name = "PC", imageBackground = null, gamesCount = 5000),
+                PlatformInfoDetailResponse(
+                    info = GameDataListInfoResponse(
+                        id = 1,
+                        name = "PC",
+                        imageBackground = null,
+                        gamesCount = 5000
+                    ),
                     releasedAt = "2021-05-05",
-                    requirements = GameDetailResponse.PlatformInfoDetailResponse.PlatformRequirementsResponse(
+                    requirements = PlatformInfoDetailResponse.PlatformRequirementsResponse(
                         minimum = "min req",
                         recommended = "rec req"
                     )
                 )
             ),
             stores = listOf(
-                GameDetailResponse.StoreInfoDetailResponse(
+                StoreInfoDetailResponse(
                     id = 7,
-                    info = GameDetailResponse.StoreInfoDetailResponse.StoreItemResponse(
+                    info = StoreInfoDetailResponse.StoreItemResponse(
                         id = 70,
                         name = "Steam",
                         domain = "store.steampowered.com",

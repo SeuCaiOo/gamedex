@@ -14,11 +14,14 @@ class DomainModuleTest : KoinTest {
     @Test
     fun `check all modules from domain`() {
         checkModules {
-            modules(provideDomainModule(), module {
-                single { mockk<PlatformsRepository>() }
-                single { mockk<GenresRepository>() }
-                single { mockk<GamesRepository>() }
-            })
+            modules(
+                provideDomainModule(),
+                module {
+                    single { mockk<PlatformsRepository>() }
+                    single { mockk<GenresRepository>() }
+                    single { mockk<GamesRepository>() }
+                }
+            )
         }
     }
 }

@@ -18,8 +18,8 @@ import br.com.seucaio.gamedex.ui.theme.GameDexTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GameDexTopAppBar(
-    modifier: Modifier = Modifier,
     title: String,
+    modifier: Modifier = Modifier,
     onBackButtonClick: (() -> Unit)? = null,
 ) {
     TopAppBar(

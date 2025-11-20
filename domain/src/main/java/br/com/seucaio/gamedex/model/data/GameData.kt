@@ -4,4 +4,3 @@ interface GameData {
     val id: Int
     val name: String
 }
-

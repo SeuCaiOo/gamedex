@@ -19,5 +19,4 @@ data class PlatformDetailsUiState(
     fun setSearchSheetVisibility(isVisible: Boolean) = copy(isSearchSheetVisible = isVisible)
 
     fun updateSearchQuery(query: String) = copy(searchQuery = query)
-
 }

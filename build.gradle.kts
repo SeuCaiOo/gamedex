@@ -16,21 +16,19 @@ plugins {
 subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
 
-    afterEvaluate {
-        extensions.configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
-            toolVersion = libs.versions.detekt.get()
-            config.setFrom(file("$rootDir/config/detekt/detekt.yml"))
-            buildUponDefaultConfig = true
-        }
-
-        tasks.withType<Detekt>().configureEach {
-            jvmTarget = "11"
-            reports {
-                html.required.set(true)
-                xml.required.set(false)
-                txt.required.set(false)
-                sarif.required.set(false)
-            }
+    tasks.withType<Detekt>().configureEach {
+        jvmTarget = "11"
+        reports {
+            html.required.set(true)
+            xml.required.set(false)
+            txt.required.set(false)
+            sarif.required.set(false)
         }
     }
+}
+
+tasks.register<Delete>("clean") {
+    description = "Deletes build directories for the root project and all subprojects."
+    // Add the root build directory to the set of deletable files for the clean task.
+    delete(layout.buildDirectory)
 }

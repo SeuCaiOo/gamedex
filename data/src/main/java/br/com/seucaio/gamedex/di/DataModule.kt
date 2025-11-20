@@ -24,7 +24,6 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 fun provideDataModule() = module {
-
     // region Network
     single { ConnectivityChecker(androidApplication()) }
     single<HttpLoggingInterceptor> { NetworkInterceptor.loggingInterceptor() }

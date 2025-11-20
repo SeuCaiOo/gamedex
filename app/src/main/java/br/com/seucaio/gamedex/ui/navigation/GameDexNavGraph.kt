@@ -77,6 +77,5 @@ fun GameDexNavGraph(
                 onNavigateBack = { navController.popBackStack() }
             )
         }
-
     }
 }

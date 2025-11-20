@@ -21,20 +21,20 @@ class PlatformsRepositoryImpl(
     private val localDataSource: PlatformsLocalDataSource
 ) : PlatformsRepository {
     override suspend fun getAll(): Result<List<GamePlatform>> {
-        try {
-            val localPlatforms: List<GamePlatformEntity> = localDataSource.getAll()
-            if (localPlatforms.isNotEmpty()) return Result.success(localPlatforms.toDomain())
+        return runCatching { getSuccessListGamePlatform() }
+    }
 
-            val remoteResults: List<GameDataListInfoResponse> = remoteDataSource.getAll().results
-            val remotePlatforms: List<GamePlatform> = remoteResults.toPlatformDomain()
+    private suspend fun getSuccessListGamePlatform(): List<GamePlatform> {
+        val localPlatforms: List<GamePlatformEntity> = localDataSource.getAll()
+        if (localPlatforms.isNotEmpty()) return localPlatforms.toDomain()
 
-            localDataSource.clearAndCache(remotePlatforms.toEntity())
-            saveCacheTopGames(remoteResults)
+        val remoteResults: List<GameDataListInfoResponse> = remoteDataSource.getAll().results
+        val remotePlatforms: List<GamePlatform> = remoteResults.toPlatformDomain()
 
-            return Result.success(remotePlatforms)
-        } catch (e: Exception) {
-            return Result.failure(e)
-        }
+        localDataSource.clearAndCache(remotePlatforms.toEntity())
+        saveCacheTopGames(remoteResults)
+
+        return remotePlatforms
     }
 
     private suspend fun saveCacheTopGames(remoteResults: List<GameDataListInfoResponse>) {
@@ -46,25 +46,25 @@ class PlatformsRepositoryImpl(
     }
 
     override suspend fun getById(id: Int): Result<GamePlatformDetail> {
-        try {
-            val platformEntity: GamePlatformEntity? = localDataSource.getByPlatformId(id)
-            val topGamesCache: List<TopGameData> = getTopGamesPlatformCache(id).toDomain()
+        return runCatching { getSuccessPlatformDetail(id) }
+    }
 
-            if (platformEntity != null && platformEntity.description.isNotBlank()) {
-                return Result.success(platformEntity.toDetailDomain(topGamesCache))
-            }
+    private suspend fun getSuccessPlatformDetail(id: Int): GamePlatformDetail {
+        val platformEntity: GamePlatformEntity? = localDataSource.getByPlatformId(id)
+        val topGamesCache: List<TopGameData> = getTopGamesPlatformCache(id).toDomain()
 
-            val remotePlatformDetail: GamePlatformDetail =
-                remoteDataSource.getById(id).toPlatformDetailDomain(topGamesCache)
-
-            val entityToUpdate: GamePlatformEntity? = localDataSource.getByPlatformId(id)
-            entityToUpdate?.let {
-                localDataSource.updatePlatform(it.setDescription(remotePlatformDetail.description))
-            }
-            return Result.success(remotePlatformDetail)
-        } catch (e: Exception) {
-            return Result.failure(e)
+        if (platformEntity != null && platformEntity.description.isNotBlank()) {
+            return platformEntity.toDetailDomain(topGamesCache)
         }
+
+        val remotePlatformDetail: GamePlatformDetail =
+            remoteDataSource.getById(id).toPlatformDetailDomain(topGamesCache)
+
+        val entityToUpdate: GamePlatformEntity? = localDataSource.getByPlatformId(id)
+        entityToUpdate?.let {
+            localDataSource.updatePlatform(it.setDescription(remotePlatformDetail.description))
+        }
+        return remotePlatformDetail
     }
 
     private suspend fun getTopGamesPlatformCache(platformId: Int) =

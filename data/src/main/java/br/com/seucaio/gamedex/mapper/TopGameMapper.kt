@@ -8,5 +8,4 @@ object TopGameMapper {
     fun TopGameEntity.toDomain(): TopGameData = TopGameData(id = gameId, name = name)
 
     fun List<TopGameEntity>.toDomain(): List<TopGameData> = map { it.toDomain() }
-
 }

@@ -82,6 +82,4 @@ class PlatformDetailsViewModel(
             _uiEvent.emit(PlatformDetailsUiEvent.NavigateToGamesBySearch(query))
         }
     }
-
 }
-

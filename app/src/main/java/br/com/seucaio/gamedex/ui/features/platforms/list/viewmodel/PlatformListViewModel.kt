@@ -51,5 +51,4 @@ class PlatformListViewModel(
     private fun navigateToDetail(platformId: Int) {
         viewModelScope.launch { _uiEvent.emit(PlatformListUiEvent.NavigateToDetail(platformId)) }
     }
-
 }

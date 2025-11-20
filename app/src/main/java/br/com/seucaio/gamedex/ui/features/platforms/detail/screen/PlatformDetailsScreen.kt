@@ -7,6 +7,7 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -30,13 +31,16 @@ fun PlatformDetailsScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val sheetState = rememberModalBottomSheetState()
     val context = LocalContext.current
+    val latestOnNavigateBack by rememberUpdatedState(onNavigateBack)
+    val latestOnNavigateToGameDetails by rememberUpdatedState(onNavigateToGameDetails)
+    val latestOnNavigateToGameListBySearch by rememberUpdatedState(onNavigateToGameListBySearch)
 
     LaunchedEffect(Unit) {
         viewModel.uiEvent.collect { event ->
             when (event) {
-                is PlatformDetailsUiEvent.NavigateBack -> onNavigateBack()
+                is PlatformDetailsUiEvent.NavigateBack -> latestOnNavigateBack()
                 is PlatformDetailsUiEvent.NavigateToGameDetails -> {
-                    onNavigateToGameDetails(event.gameId)
+                    latestOnNavigateToGameDetails(event.gameId)
                 }
 
                 is PlatformDetailsUiEvent.NavigateToGamesBySearch -> {
@@ -46,7 +50,7 @@ fun PlatformDetailsScreen(
                         Toast.LENGTH_SHORT
                     ).show()
                     sheetState.hide()
-                    onNavigateToGameListBySearch(event.query)
+                    latestOnNavigateToGameListBySearch(event.query)
                 }
             }
         }
@@ -63,7 +67,6 @@ fun PlatformDetailsScreen(
             )
         }
     }
-
 
     PlatformDetailsContent(
         state = state,

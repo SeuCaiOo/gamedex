@@ -34,7 +34,7 @@ fun PlatformListContent(
             state.platforms != null -> {
                 PlatformListSuccessContent(
                     platformList = state.platforms,
-                    modifier = modifier,
+                    modifier = Modifier,
                     onItemClick = { platform ->
                         onAction(PlatformListUiAction.OnPlatformClick(platform.id))
                     }
@@ -43,13 +43,13 @@ fun PlatformListContent(
 
             !state.errorMessage.isNullOrBlank() -> {
                 GameDexErrorContent(
-                    modifier = modifier,
+                    modifier = Modifier,
                     onRetry = { onAction(PlatformListUiAction.RetryLoadPlatforms) },
                     message = state.errorMessage
                 )
             }
 
-            state.isLoading -> GameDexLoadingContent(modifier = modifier)
+            state.isLoading -> GameDexLoadingContent(modifier = Modifier)
         }
     }
 }
@@ -84,8 +84,6 @@ fun PlatformListSuccessContent(
         }
     }
 }
-
-
 
 @PreviewLightDark
 @Composable
