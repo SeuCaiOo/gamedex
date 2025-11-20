@@ -26,3 +26,9 @@ subprojects {
         }
     }
 }
+
+tasks.register<Delete>("clean") {
+    description = "Deletes build directories for the root project and all subprojects."
+    // Add the root build directory to the set of deletable files for the clean task.
+    delete(layout.buildDirectory)
+}
