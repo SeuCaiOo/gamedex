@@ -1,5 +1,6 @@
 package br.com.seucaio.gamedex.remote.source
 
+import br.com.seucaio.gamedex.core.TestCoroutineRule
 import br.com.seucaio.gamedex.core.network.ConnectivityChecker
 import br.com.seucaio.gamedex.remote.dto.game.GameDetailResponse
 import br.com.seucaio.gamedex.remote.dto.game.GameItemResponse
@@ -12,9 +13,10 @@ import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -22,7 +24,8 @@ import kotlin.test.assertFailsWith
 @ExperimentalCoroutinesApi
 class GamesRemoteDataSourceTest {
 
-    private val testDispatcher = StandardTestDispatcher()
+    @get:Rule
+    val testDispatcherRule = TestCoroutineRule(UnconfinedTestDispatcher())
 
     @MockK
     private lateinit var apiService: GameDexApiService
@@ -38,7 +41,7 @@ class GamesRemoteDataSourceTest {
         dataSource = GamesRemoteDataSourceImpl(
             apiService = apiService,
             connectivityChecker = connectivityChecker,
-            ioDispatcher = testDispatcher
+            ioDispatcher = testDispatcherRule.dispatcher
         )
     }
 

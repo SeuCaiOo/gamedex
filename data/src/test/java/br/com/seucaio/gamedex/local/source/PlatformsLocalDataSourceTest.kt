@@ -1,19 +1,23 @@
 package br.com.seucaio.gamedex.local.source
 
+import br.com.seucaio.gamedex.core.TestCoroutineRule
 import br.com.seucaio.gamedex.local.database.entity.GamePlatformEntity
 import br.com.seucaio.gamedex.local.database.entity.TopGameEntity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class PlatformsLocalDataSourceTest {
 
-    private val testDispatcher = StandardTestDispatcher()
+    @get:Rule
+    val testDispatcherRule = TestCoroutineRule(UnconfinedTestDispatcher())
+
     private lateinit var platformsDao: FakePlatformsDao
     private lateinit var topGamesDao: FakeTopGamesDao
     private lateinit var localDataSource: PlatformsLocalDataSource
@@ -40,7 +44,7 @@ class PlatformsLocalDataSourceTest {
         localDataSource = PlatformsLocalDataSourceImpl(
             dao = platformsDao,
             topGamesDao = topGamesDao,
-            ioDispatcher = testDispatcher
+            ioDispatcher = testDispatcherRule.dispatcher
         )
     }
 
