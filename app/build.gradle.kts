@@ -100,4 +100,46 @@ kover {
         kover(project(":domain"))
         kover(project(":data"))
     }
+
+    reports {
+        total {
+            log { onCheck = true }
+            html { onCheck = true }
+            xml { onCheck = true }
+
+            filters {
+                excludes {
+                    classes(
+                        "*BuildConfig*",
+                        "*.R",
+                        "*.R$*",
+                        "*Composable*",
+                        "*Screen*",
+                        "*NavGraph*",
+                        "*Route*",
+                        "*Application*",
+                        "*Activity*"
+                    )
+                    packages(
+                        "*.ui.theme",
+                        "*.ui.components",
+                        "*.ui.navigation",
+                        "**.screen**"
+                    )
+                    annotatedBy(
+                        "androidx.compose.ui.tooling.preview.Preview",
+                        "androidx.compose.runtime.Composable"
+                    )
+                }
+                includes {}
+            }
+
+            verify {
+                warningInsteadOfFailure = true
+                rule("Rule of coverage minimum for the project") {
+                    minBound(60)
+                }
+            }
+        }
+    }
 }
