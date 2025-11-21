@@ -20,9 +20,9 @@ subprojects {
         jvmTarget = "11"
         reports {
             html.required.set(true)
-            xml.required.set(false)
+            xml.required.set(true)
+            sarif.required.set(true)
             txt.required.set(false)
-            sarif.required.set(false)
         }
     }
 }
