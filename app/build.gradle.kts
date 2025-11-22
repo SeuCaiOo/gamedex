@@ -44,6 +44,12 @@ android {
         compose = true
     }
 
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1,LICENSE.md,LICENSE-notice.md}"
@@ -70,6 +76,8 @@ dependencies {
 
     testImplementation(libs.bundles.unitTest)
     testImplementation(libs.bundles.unitTestAndroid)
+    testImplementation(libs.androidx.compose.ui.test.junit4)
+    testImplementation(libs.robolectric)
 
     androidTestImplementation(libs.bundles.androidTest)
     androidTestImplementation(platform(libs.androidx.compose.bom))
