@@ -72,7 +72,6 @@ class PlatformDetailsViewModel(
     private fun onSearchClick() {
         val currentQuery = _uiState.value.searchQuery
         if (currentQuery.isNotBlank()) {
-            showSearchSheet(false)
             navigateToGamestBySearch(currentQuery)
         }
     }
@@ -80,6 +79,7 @@ class PlatformDetailsViewModel(
     private fun navigateToGamestBySearch(query: String) {
         viewModelScope.launch {
             _uiEvent.emit(PlatformDetailsUiEvent.NavigateToGamesBySearch(query))
+            showSearchSheet(false)
         }
     }
 }

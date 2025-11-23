@@ -125,28 +125,29 @@ class PlatformDetailsViewModelTest {
     }
 
     @Test
-    fun `should call getPlatformByIdUseCase again when RetryLoadPlatforms action is triggered`() = runTest {
-        // Given
-        coEvery { getPlatformByIdUseCase(testPlatformId) } returns Result.failure(Exception())
+    fun `should call getPlatformByIdUseCase again when RetryLoadPlatforms action is triggered`() =
+        runTest {
+            // Given
+            coEvery { getPlatformByIdUseCase(testPlatformId) } returns Result.failure(Exception())
 
-        // When
-        initViewModel()
+            // When
+            initViewModel()
 
-        // Then
-        viewModel.uiState.test {
-            // Skip default
-            skipItems(1)
+            // Then
+            viewModel.uiState.test {
+                // Skip default
+                skipItems(1)
 
-            // Retry
-            viewModel.handleUiAction(PlatformDetailsUiAction.RetryLoadPlatform)
+                // Retry
+                viewModel.handleUiAction(PlatformDetailsUiAction.RetryLoadPlatform)
 
-            val loadingState = awaitItem()
-            assertTrue(loadingState.isLoading)
+                val loadingState = awaitItem()
+                assertTrue(loadingState.isLoading)
 
-            cancelAndIgnoreRemainingEvents()
+                cancelAndIgnoreRemainingEvents()
+            }
+            coVerify(exactly = 2) { getPlatformByIdUseCase(any()) }
         }
-        coVerify(exactly = 2) { getPlatformByIdUseCase(any()) }
-    }
     // endregion
 
     // region UiEvent Tests
@@ -164,6 +165,124 @@ class PlatformDetailsViewModelTest {
 
             val event: PlatformDetailsUiEvent = awaitItem()
             assertTrue(event is PlatformDetailsUiEvent.NavigateBack)
+
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `should emit NavigateToDetail event when OnGameClick action is triggered`() = runTest {
+        // Given
+        coEvery { getPlatformByIdUseCase(testPlatformId) } returns Result.success(testPlatform)
+
+        initViewModel()
+
+        // When/Then
+        viewModel.uiEvent.test {
+            val gameId = 99
+            viewModel.handleUiAction(PlatformDetailsUiAction.OnGameClick(gameId))
+
+            val event = awaitItem()
+            assertTrue(event is PlatformDetailsUiEvent.NavigateToGameDetails)
+            assertEquals(gameId, event.gameId)
+
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
+    // endregion
+
+    // region Search feature tests
+
+    @Test
+    fun `should show and hide search sheet when respective actions are triggered`() = runTest {
+        // Given
+        coEvery { getPlatformByIdUseCase(testPlatformId) } returns Result.success(testPlatform)
+
+        // When
+        initViewModel()
+
+        // Then
+        viewModel.uiState.test {
+            // initial, loading, success from init
+            skipItems(3)
+
+            // Open search sheet
+            viewModel.handleUiAction(PlatformDetailsUiAction.OpenSearchSheet)
+            val openState = awaitItem()
+            assertTrue(openState.isSearchSheetVisible)
+
+            // Dismiss search sheet
+            viewModel.handleUiAction(PlatformDetailsUiAction.DismissSearchSheet)
+            val dismissState = awaitItem()
+            assertFalse(dismissState.isSearchSheetVisible)
+
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `should update search query on OnSearchQueryChange action`() = runTest {
+        // Given
+        coEvery { getPlatformByIdUseCase(testPlatformId) } returns Result.success(testPlatform)
+
+        initViewModel()
+
+        viewModel.uiState.test {
+            // initial, loading, success from init
+            skipItems(3)
+
+            val query = "zelda"
+            viewModel.handleUiAction(PlatformDetailsUiAction.OnSearchQueryChange(query))
+
+            val updatedState = awaitItem()
+            assertEquals(query, updatedState.searchQuery)
+
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `should not emit event when OnSearchClick with blank query`() = runTest {
+        // Given
+        coEvery { getPlatformByIdUseCase(testPlatformId) } returns Result.success(testPlatform)
+
+        initViewModel()
+
+        // Open sheet to ensure visibility prior to click
+        viewModel.handleUiAction(PlatformDetailsUiAction.OpenSearchSheet)
+
+        viewModel.uiEvent.test {
+            // When query is blank by default, clicking search should do nothing
+            viewModel.handleUiAction(PlatformDetailsUiAction.OnSearchClick)
+
+            // Then
+            expectNoEvents()
+
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `should emit NavigateToGamesBySearch and hide sheet on OnSearchClick with non blank query`() = runTest {
+        // Given
+        coEvery { getPlatformByIdUseCase(testPlatformId) } returns Result.success(testPlatform)
+
+        initViewModel()
+
+        val query = "mario"
+
+        // Prepare state: set query and open sheet
+        viewModel.handleUiAction(PlatformDetailsUiAction.OnSearchQueryChange(query))
+//        viewModel.handleUiAction(PlatformDetailsUiAction.OpenSearchSheet)
+
+        // Assert event emission
+        viewModel.uiEvent.test {
+            viewModel.handleUiAction(PlatformDetailsUiAction.OnSearchClick)
+
+            val event = awaitItem()
+            assertTrue(event is PlatformDetailsUiEvent.NavigateToGamesBySearch)
+            assertEquals(query, event.query)
 
             cancelAndIgnoreRemainingEvents()
         }
