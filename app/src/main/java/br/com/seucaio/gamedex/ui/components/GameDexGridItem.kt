@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -49,7 +50,10 @@ fun GameDexGridItem(
                         error = painterResource(R.drawable.ic_launcher_background),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
-                        modifier = Modifier.padding(bottom = 24.dp).fillMaxSize()
+                        modifier = Modifier
+                            .testTag("background_image")
+                            .padding(bottom = 24.dp)
+                            .fillMaxSize()
                     )
                 }
                 Column(
