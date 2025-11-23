@@ -78,6 +78,7 @@ dependencies {
     testImplementation(libs.bundles.unitTestAndroid)
     testImplementation(libs.androidx.compose.ui.test.junit4)
     testImplementation(libs.robolectric)
+    testImplementation(libs.bundles.koinTest)
 
     androidTestImplementation(libs.bundles.androidTest)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -130,13 +131,12 @@ kover {
                     )
                     packages(
                         "*.ui.theme",
-                        "*.ui.components",
                         "*.ui.navigation",
                         "**.screen**"
                     )
                     annotatedBy(
                         "androidx.compose.ui.tooling.preview.Preview",
-                        "androidx.compose.runtime.Composable"
+                        "androidx.compose.ui.tooling.preview.PreviewLightDark"
                     )
                 }
                 includes {}
