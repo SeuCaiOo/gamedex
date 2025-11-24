@@ -105,7 +105,7 @@ detekt {
     )
     toolVersion = libs.versions.detekt.get()
     buildUponDefaultConfig = true
-    ignoreFailures = true
+    ignoreFailures = false
 }
 
 // Configure Kover to generate an aggregated report for all modules.

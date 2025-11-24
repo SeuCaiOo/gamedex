@@ -27,5 +27,5 @@ detekt {
     config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
     toolVersion = libs.versions.detekt.get()
     buildUponDefaultConfig = true
-    ignoreFailures = true
+    ignoreFailures = false
 }
