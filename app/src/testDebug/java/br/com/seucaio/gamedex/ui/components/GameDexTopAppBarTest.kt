@@ -26,7 +26,6 @@ class GameDexTopAppBarTest {
     private val title = "GameDex"
     private val backButtonContentDescription = "Back"
 
-
     private fun setupContent(onBackButtonClick: (() -> Unit)? = null) {
         composeTestRule.setContent {
             GameDexTheme(dynamicColor = false) {
