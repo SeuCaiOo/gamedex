@@ -12,7 +12,11 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(application = Application::class)
+@Config(
+    application = Application::class,
+    sdk = [36],
+    manifest = Config.DEFAULT_MANIFEST_NAME
+)
 class GameDexDescriptionInfoTest {
 
     @get:Rule
