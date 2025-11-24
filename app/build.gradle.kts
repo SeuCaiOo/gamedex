@@ -47,8 +47,10 @@ android {
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
-            all {
-                it.systemProperty("robolectric.enabledSdks", "36")
+            all { test ->
+                test.systemProperty("robolectric.enabledSdks", "34")
+                test.systemProperty("robolectric.offline", "true")
+                test.systemProperty("robolectric.dependency.dir", "${buildDir}/robolectric-dependencies")
             }
         }
     }
