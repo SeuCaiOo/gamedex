@@ -47,6 +47,11 @@ android {
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
+            all { test ->
+                test.systemProperty("robolectric.enabledSdks", "34")
+                test.systemProperty("robolectric.offline", "true")
+                test.systemProperty("robolectric.dependency.dir", "${buildDir}/robolectric-dependencies")
+            }
         }
     }
 
@@ -100,7 +105,7 @@ detekt {
     )
     toolVersion = libs.versions.detekt.get()
     buildUponDefaultConfig = true
-    ignoreFailures = true
+    ignoreFailures = false
 }
 
 // Configure Kover to generate an aggregated report for all modules.
